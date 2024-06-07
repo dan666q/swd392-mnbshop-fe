@@ -55,3 +55,13 @@ export type LoginUserAPIResponse = {
     refreshToken: string
   }
 }
+// interface product
+export interface Product {
+  id: number;
+  name: string;
+  brand: string;
+  price: number;
+  rating: number;
+  image: string;
+  liked: boolean;
+}

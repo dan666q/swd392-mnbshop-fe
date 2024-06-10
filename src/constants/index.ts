@@ -3,18 +3,17 @@ import { QueryClient } from '@tanstack/react-query'
 export const dateFormatList = ['YYYY-MM-DD', 'DD-MM-YYYY']
 
 export const AUTHORITIES = {
-  ADMIN: 'Admin',
-  CUSTOMER: 'Customer',
-  STAFF: 'Staff',
-  GUEST: 'Guest',
+  ADMIN: 'admin',
+  CUSTOMER: 'customer',
+  STAFF: 'staff',
+  GUEST: 'guest',
 }
 
 export const ORDER_STATUSES = {
-  PENDING: 'Pending',
-  PROCESSING: 'Processing',
-  SHIPPED: 'Shipped',
-  COMPLETED: 'Completed',
-  CANCELLED: 'Cancelled',
+  WAITING: 'waiting',
+  PROCESSING: 'processing',
+  DELIVERY: 'delivery',
+  DONE: 'done',
 }
 
 export const queryClient = new QueryClient({
@@ -55,19 +54,7 @@ export const PAGINATION = {
 // Tiêu đề popup
 export const POPUP_TITLE = {
   FILTER: 'Filter',
-  ADD_PRODUCT: 'Add new product',
+  IMPORT_PRODUCT: 'Add new product',
   UPDATE_PRODUCT: 'Update product',
   DELETE_PRODUCT: 'Delete product',
-
-  ADD_ACCOUNT: 'Add new account',
-  UPDATE_ACCOUNT: 'Update account',
-  DISABLE_ACCOUNT: 'Disable account',
-
-  ADD_ORDER: 'Add new order',
-  UPDATE_ORDER: 'Update order',
-  DELETE_ORDER: 'Delete order',
-
-  ADD_BRAND: 'Add new brand',
-  UPDATE_BRAND: 'Update brand',
-  DELETE_BRAND: 'Delete brand',
 }

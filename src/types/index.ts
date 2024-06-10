@@ -56,7 +56,7 @@ export type LoginUserAPIResponse = {
   }
 }
 // interface product
-export interface CustomerProductCard {
+export type CustomerProductCard = {
   id: number;
   name: string;
   brand: string;

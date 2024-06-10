@@ -79,3 +79,13 @@ export type AccountTableData = {
   isDisable: boolean
   role: string
 }
+// interface product
+export interface CustomerProductCard {
+  id: number;
+  name: string;
+  brand: string;
+  price: number;
+  rating: number;
+  image: string;
+  liked: boolean;
+}

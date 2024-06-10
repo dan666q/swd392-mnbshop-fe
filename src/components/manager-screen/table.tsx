@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from '@/lib/redux-toolkit/hook'
 import { setPagination } from '@/lib/redux-toolkit/slices/pagination-slice'
 import { setIsChosen, setProductChosen } from '@/lib/redux-toolkit/slices/chosen-slice'
-import { ProductTableData, AccountTableData } from '@/types'
+import { ProductTableData, AccountTableData, BrandTableData, OrderTableData } from '@/types'
 import { Table, TableColumnsType } from 'antd'
 
-type TableDataType = AccountTableData | ProductTableData
+type TableDataType = AccountTableData | ProductTableData | BrandTableData | OrderTableData
 
 interface TableDataProps<T> {
   columns: TableColumnsType<T>
@@ -56,7 +56,6 @@ export default function TableData<T extends TableDataType>({
             }
           : undefined
       }
-      className="h-full"
       size="middle"
     />
   )

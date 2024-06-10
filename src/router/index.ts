@@ -17,9 +17,11 @@ import ProductManager from '@/pages/manager-pages/product-manager'
 import AccountManager from '@/pages/manager-pages/account-manager'
 import Dashboard from '@/pages/manager-pages/dashboard'
 import PromotionManager from '@/pages/manager-pages/promotion-manager'
-import { AUTHORITIES } from '@/constants'
 import BlogManager from '@/pages/manager-pages/blog-manager'
 import NotFound from '@/pages/not-found'
+import OrderManager from '@/pages/manager-pages/order-manager'
+import BrandManager from '@/pages/manager-pages/brand-manager'
+import { AUTHORITIES } from '@/constants'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -42,9 +44,11 @@ export const ROUTE_PATHS_CUSTOMER = {
 export const ROUTE_PATHS_MANAGER = {
   DASHBOARD: '/dashboard',
   PROFILE: '/profile',
-  M_PRODUCT: '/products',
-  M_BLOG: '/blogs',
   M_ACCOUNT: '/accounts',
+  M_BRAND: '/brands',
+  M_PRODUCT: '/products',
+  M_ORDER: '/orders',
+  M_BLOG: '/blogs',
   M_PROMOTION: '/promotion',
 }
 
@@ -120,7 +124,7 @@ export const routes = [
   },
   {
     path: ROUTE_PATHS_CUSTOMER.CHECKOUT,
-    name: 'Cart',
+    name: 'Checkout',
     component: Checkout,
     layout: null,
     roles: [AUTHORITIES.CUSTOMER],
@@ -157,9 +161,25 @@ export const routes = [
     roles: [AUTHORITIES.ADMIN],
   },
   {
+    path: ROUTE_PATHS_MANAGER.M_BRAND,
+    name: 'Brand Manager',
+    component: BrandManager,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
     path: ROUTE_PATHS_MANAGER.M_PRODUCT,
     name: 'Product Manager',
     component: ProductManager,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
+    path: ROUTE_PATHS_MANAGER.M_ORDER,
+    name: 'Order Manager',
+    component: OrderManager,
     layout: ManagerDefaultLayout,
     private: true,
     roles: [AUTHORITIES.ADMIN],

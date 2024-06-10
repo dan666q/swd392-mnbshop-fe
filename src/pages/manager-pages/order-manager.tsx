@@ -1,24 +1,24 @@
-import Popup from '@/components/manager-screen/popup'
-import ConfigAntdTheme from '@/lib/antd/config-theme'
-import ViewListProduct from '@/features/manager-feature/product-mng/view-list-product'
 import SectionHeader from '@/components/manager-screen/section-header'
-import AddProduct from '@/features/manager-feature/product-mng/add-product'
+import ConfigAntdTheme from '@/lib/antd/config-theme'
+import Popup from '@/components/manager-screen/popup'
+import ViewListOrder from '@/features/manager-feature/order-mng/view-list-order'
+import AddBrand from '@/features/manager-feature/brand-mng/add-brand'
+import { Button } from 'antd'
 import { POPUP_TITLE } from '@/constants'
 import { GreenButtonStyle } from '@/lib/antd/antd-styles'
 import { PlusCircleOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
 
-export default function ProductManager() {
+export default function OrderManager() {
   return (
     <>
-      <SectionHeader title="Product List" className="" />
+      <SectionHeader title="Order List" className="" />
       <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between">
           {/* Searchbar */}
           <div className="flex flex-col gap-4 ml-auto">
             <div className="flex items-center gap-2">
               <ConfigAntdTheme theme={GreenButtonStyle}>
-                <Popup width={500} type="form" title={POPUP_TITLE.ADD_PRODUCT} content={<AddProduct />}>
+                <Popup width={500} type="form" title={POPUP_TITLE.ADD_ORDER} content={<AddBrand />}>
                   <Button type="primary" icon={<PlusCircleOutlined />}>
                     Add new
                   </Button>
@@ -27,7 +27,7 @@ export default function ProductManager() {
             </div>
           </div>
         </div>
-        <ViewListProduct />
+        <ViewListOrder />
       </div>
     </>
   )

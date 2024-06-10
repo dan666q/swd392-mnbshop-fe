@@ -17,7 +17,6 @@ interface PopupProps {
 export default function Popup({ children, content, type, title, icon, width }: PopupProps) {
   const dispatch = useAppDispatch()
   const isOpen = useAppSelector((state) => state.popup[title])
-
   return (
     <>
       <div onClick={() => dispatch(openPopup(title))}>{children}</div>

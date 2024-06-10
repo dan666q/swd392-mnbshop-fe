@@ -1,7 +1,7 @@
 import TableData from '@/components/manager-screen/table'
+import data from '@/mock/products-list.json'
 import { VIEW_PRODUCT_COLS } from '@/constants/table-columns'
 import { ProductTableData } from '@/types'
-import data from '@/mock/products-list.json'
 
 export default function ViewListProduct() {
   const addKeyToData = (dataArray: ProductTableData[] | null) => {
@@ -13,9 +13,6 @@ export default function ViewListProduct() {
       }
     })
   }
-
-  console.log(data.length)
-
   const dataWithKeys: ProductTableData[] = (data && addKeyToData(data)) || []
 
   return (
@@ -24,8 +21,8 @@ export default function ViewListProduct() {
         columns={VIEW_PRODUCT_COLS}
         data={dataWithKeys}
         total={data?.length}
-        scrollX={1500}
-        scrollY={450}
+        scrollX={1400}
+        scrollY={620}
         hasRowSelection
       />
     </div>

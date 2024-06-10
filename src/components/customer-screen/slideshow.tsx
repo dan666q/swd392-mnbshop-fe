@@ -9,18 +9,6 @@ const images = [slideShow1, slideShow2] // Add your image sources here
 const SlideShow: React.FC = () => {
   const carouselRef = React.useRef<any>(null)
 
-  const goToPrevious = () => {
-    if (carouselRef.current) {
-      carouselRef.current.prev()
-    }
-  }
-
-  const goToNext = () => {
-    if (carouselRef.current) {
-      carouselRef.current.next()
-    }
-  }
-
   return (
     <div className="home__container relative">
       <div className="slideshow">

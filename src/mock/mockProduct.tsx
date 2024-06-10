@@ -1,14 +1,13 @@
-import { Product } from '../types/index' // Adjust the import path if needed
+import { CustomerProductCard } from '../types/index' // Adjust the import path if needed
 
-export const mockProducts: Product[] = [
+export const mockProducts: CustomerProductCard[] = [
   {
     id: 1,
     name: 'Similac Advance Infant Formula',
     brand: 'Abbott',
     price: 25.99,
     rating: 4.7,
-    image:
-      'https://target.scene7.com/is/image/Target/GUEST_9f9d45e3-4e9d-4b6b-b6b1-378dd0c4c22e?wid=325&hei=325&qlt=80&fmt=webp',
+    image: 'https://mommomcare.com/wp-content/uploads/2023/01/similac-advance.jpg',
     liked: false,
   },
   {
@@ -17,7 +16,7 @@ export const mockProducts: Product[] = [
     brand: 'Enfamil (Mead Johnson)',
     price: 27.49,
     rating: 4.6,
-    image: 'https://www.enfamil.com/media/images/products/pdp/enfamil-neuropro-gentlease-ready-to-use-liquid-32oz.jpg',
+    image: 'https://www.anbebe.vn/wp-content/uploads/2020/08/4dfb4fa6909e6cc0358f.jpg',
     liked: true,
   },
   {
@@ -27,7 +26,7 @@ export const mockProducts: Product[] = [
     price: 23.99,
     rating: 4.5,
     image:
-      'https://www.gerber.com/sites/default/files/styles/product_image/public/product/gerber_good_start_gentle.jpg?itok=4GgOY6Rb',
+      'https://target.scene7.com/is/image/Target/GUEST_da74f01e-c16f-472f-ab68-3d262c6562a7?wid=488&hei=488&fmt=pjpeg',
     liked: false,
   },
   {
@@ -36,7 +35,8 @@ export const mockProducts: Product[] = [
     brand: 'Abbott',
     price: 19.99,
     rating: 4.8,
-    image: 'https://www.similac.com/sites/default/files/Similac_Prenatal_Gummies_7.png',
+    image:
+      'https://lh6.googleusercontent.com/proxy/Lohd-WK0lYxyMCaVc_iTC8H-bzESkSRRd9ftIn9frfc9aNTmXdC6vPQdRgNLeCqZfCOGpCWEsb3TmZ6_BOTf1ahWg9J0xUgKpn9WhUQhNEPpWA',
     liked: true,
   },
   {
@@ -45,7 +45,7 @@ export const mockProducts: Product[] = [
     brand: 'Nestlé',
     price: 18.99,
     rating: 4.6,
-    image: 'https://www.nestleusa.com/sites/g/files/jgfbjl326/files/asset-library/brand_image/nido/product/nido_12.png',
+    image: 'https://m.media-amazon.com/images/I/81P0bP6uL7L._SL1500_.jpg',
     liked: false,
   },
   {
@@ -54,36 +54,7 @@ export const mockProducts: Product[] = [
     brand: 'Abbott',
     price: 24.99,
     rating: 4.5,
-    image:
-      'https://target.scene7.com/is/image/Target/GUEST_84f5942e-1ad5-4e63-ae92-e1626a27d041?wid=488&hei=488&fmt=pjpeg',
+    image: 'https://m.media-amazon.com/images/I/61+-L1lClhL._AC_SL1301_.jpg',
     liked: true,
-  },
-  {
-    id: 7,
-    name: 'Enfamil Expecta Prenatal DHA Supplement',
-    brand: 'Enfamil (Mead Johnson)',
-    price: 21.49,
-    rating: 4.7,
-    image: 'https://www.enfamil.com/media/images/products/pdp/enfamil-expecta-prenatal-supplement-60ct.png',
-    liked: false,
-  },
-  {
-    id: 8,
-    name: 'Gerber Good Start SoothePro Infant Formula',
-    brand: 'Gerber (Nestlé)',
-    price: 25.99,
-    rating: 4.4,
-    image:
-      'https://www.gerber.com/sites/default/files/styles/product_image/public/product/gerber_good_start_soothe.jpg?itok=6O6dJGsn',
-    liked: true,
-  },
-  {
-    id: 9,
-    name: 'Nestlé NAN Optipro 1 Infant Formula',
-    brand: 'Nestlé',
-    price: 22.99,
-    rating: 4.7,
-    image: 'https://www.nestlehealthscience.com/sites/default/files/2020-12/nan%201_optipro.png',
-    liked: false,
   },
 ]

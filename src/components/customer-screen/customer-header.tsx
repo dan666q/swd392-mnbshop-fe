@@ -1,3 +1,5 @@
+import React from 'react'
+import { Input } from 'antd'
 import more from '@/assets/icons/more.svg'
 import logo from '@/assets/icons/logo3.png'
 import arrowLeft from '@/assets/icons/arrow-left.svg'
@@ -9,7 +11,14 @@ import avatar from '@/assets/img/avatar.jpg'
 import { Link } from 'react-router-dom'
 import { ROUTE_PATHS, ROUTE_PATHS_CUSTOMER } from '@/router'
 
+const { Search } = Input
+
 export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }) {
+  const onSearch = (value: string) => {
+    console.log(value)
+    // Implement the search functionality here
+  }
+
   return (
     <header className="header">
       <div className="container">
@@ -64,10 +73,8 @@ export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }
 
           {isLoginPage ? (
             <div className="top-act">
-              <div className="top-act__group d-md-none top-act__group--single">
-                <button className="top-act__btn">
-                  <img src={search} alt="" className="icon top-act__icon" />
-                </button>
+              <div className=" d-md-none top-act__group--single">
+                <Search placeholder="Search" allowClear onSearch={onSearch} size="large" style={{ width: 400 }} />
               </div>
               <div className="top-act__group d-md-none">
                 <Link to={ROUTE_PATHS_CUSTOMER.FAVOURITE}>

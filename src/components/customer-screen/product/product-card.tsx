@@ -4,10 +4,10 @@ import heart from '@/assets/icons/heart.svg'
 import heartActive from '@/assets/icons/heart-red.svg'
 import star from '@/assets/icons/star.svg'
 import { ROUTE_PATHS } from '@/router'
-import { Product } from '@/types/index' // Adjust the import path if needed
+import { CustomerProductCard } from '@/types/index' // Adjust the import path if needed
 
 interface ProductCardProps {
-  product: Product
+  product: CustomerProductCard
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {

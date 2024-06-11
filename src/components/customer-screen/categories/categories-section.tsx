@@ -1,7 +1,10 @@
+// CategoriesSection.tsx
+import React from 'react'
+import ViewMore from '../view-more' // Adjust the import path if needed
+import { mockBrands } from '@/mock/mockBrand'
 import CategoryCard from './category-card'
-import ViewMore from '../view-more'
 
-export default function CategoriesSection() {
+const CategoriesSection: React.FC = () => {
   return (
     <div>
       <section className="home__container">
@@ -10,11 +13,13 @@ export default function CategoriesSection() {
           <ViewMore />
         </div>
         <div className="home__cate row row-cols-3 row-cols-md-1">
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
+          {mockBrands.map((brand) => (
+            <CategoryCard key={brand.brandId} brand={brand} />
+          ))}
         </div>
       </section>
     </div>
   )
 }
+
+export default CategoriesSection

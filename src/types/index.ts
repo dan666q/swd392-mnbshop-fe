@@ -85,7 +85,17 @@ export type CustomerProductCard = {
   name: string;
   brand: string;
   price: number;
-  rating: number;
+  stockStatus: string;
   image: string;
+  quantity: number;
+  description: string;
+  rating: number;
   liked: boolean;
+};
+
+export  type Brand = {
+  brandId: number;
+  brandName: string;
+  brandImg: string;
+  brandDesc: string;
 }

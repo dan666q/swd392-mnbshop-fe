@@ -4,7 +4,7 @@ import ViewMore from '../view-more' // Adjust the import path if needed
 import { mockBrands } from '@/mock/mockBrand'
 import CategoryCard from './category-card'
 
-const CategoriesSection: React.FC = () => {
+export default function CategoriesSection() {
   return (
     <div>
       <section className="home__container">
@@ -21,5 +21,3 @@ const CategoriesSection: React.FC = () => {
     </div>
   )
 }
-
-export default CategoriesSection

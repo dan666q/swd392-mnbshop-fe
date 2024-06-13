@@ -6,7 +6,7 @@ interface CategoryCardProps {
   brand: Brand
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ brand }) => {
+export default function CategoryCard({ brand }: CategoryCardProps) {
   return (
     <div className="col">
       <a href="">
@@ -21,5 +21,3 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ brand }) => {
     </div>
   )
 }
-
-export default CategoryCard

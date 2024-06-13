@@ -10,7 +10,7 @@ interface ProductCardProps {
   product: CustomerProductCard
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export default function ProductCard({ product }: ProductCardProps) {
   // Check if product is defined
   if (!product) {
     return null // Return null or handle appropriately
@@ -50,5 +50,3 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     </div>
   )
 }
-
-export default ProductCard

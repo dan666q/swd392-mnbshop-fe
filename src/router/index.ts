@@ -29,6 +29,8 @@ import CustomerDefaultLayout from '@/layouts/customer-layouts/default-layout'
 import { AUTHORITIES } from '@/constants'
 import ViewBlogDetail from '@/features/manager-feature/blog-mng/view-blog/view-blog-detail'
 import ViewPromotionDetail from '@/features/manager-feature/promotion-mng/view-promotion/view-promotion-detail'
+import CustomerOrderDetail from '@/pages/customer-pages/customer-order-detail'
+import CustomerOders from '@/pages/customer-pages/customer-orders'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -45,6 +47,7 @@ export const ROUTE_PATHS_CUSTOMER = {
   CHECKOUT: '/checkout',
   PROFILE: '/customer-profile',
   EDIT_PROFILE: '/edit-profile',
+  MY_ORDER: '/customer-orders',
 }
 
 export const ROUTE_PATHS_MANAGER = {
@@ -152,6 +155,22 @@ export const routes = [
     path: ROUTE_PATHS_CUSTOMER.EDIT_PROFILE,
     name: 'Edit profile',
     component: CustomerEditProfile,
+    layout: CustomerDefaultLayout,
+    roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
+  },
+  {
+    path: ROUTE_PATHS_CUSTOMER.MY_ORDER,
+    name: 'My order',
+    component: CustomerOders,
+    layout: CustomerDefaultLayout,
+    roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
+  },
+  {
+    path: `${ROUTE_PATHS_CUSTOMER.MY_ORDER}/:orderId`,
+    name: 'My order detail',
+    component: CustomerOrderDetail,
     layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
     conditional: true,

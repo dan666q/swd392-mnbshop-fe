@@ -1,10 +1,7 @@
+import OrderDetailTable from '@/components/customer-screen/profile/order-detail-table'
 import SidebarInfo from '@/components/customer-screen/profile/sidebar-info'
-import { useAuth } from '@/hooks/use-auth'
 
-export default function CustomerEditProfile() {
-  const { user, loadingInitial } = useAuth()
-
-  if (loadingInitial) return <p>Loading...</p>
+export default function CustomerOdersDetail() {
   return (
     <div>
       <main className="profile">
@@ -13,6 +10,7 @@ export default function CustomerEditProfile() {
             <div className="row gy-md-3">
               {/* Sidebar */}
               <SidebarInfo />
+              <OrderDetailTable />
             </div>
           </div>
         </div>

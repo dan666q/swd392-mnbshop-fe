@@ -7,10 +7,6 @@ import SearchBarMobile from '@/components/customer-screen/search-bar-mobile'
 import SidebarInfo from '@/components/customer-screen/profile/sidebar-info'
 
 const CustomerProfile: React.FC = () => {
-  const { user, loadingInitial } = useAuth()
-
-  if (loadingInitial) return <p>Loading...</p>
-
   return (
     <div>
       <main className="profile">
@@ -19,9 +15,9 @@ const CustomerProfile: React.FC = () => {
           <div className="profile-container">
             <div className="row gy-md-3">
               {/* Sidebar */}
-              {user && <SidebarInfo user={user} />}
+              <SidebarInfo />
               {/* Info section */}
-              {user && <CustomerInfo user={user} />}
+              <CustomerInfo />
             </div>
           </div>
         </div>

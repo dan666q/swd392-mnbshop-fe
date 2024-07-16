@@ -66,13 +66,13 @@ export default function ViewProductDetail() {
               <Descriptions.Item label="Product Name">{product?.productName}</Descriptions.Item>
               <Descriptions.Item label="Brand">{product?.productBrand}</Descriptions.Item>
               <Descriptions.Item label="Price">${product?.productPrice}</Descriptions.Item>
+              <Descriptions.Item label="Discount">{product?.discount}%</Descriptions.Item>
               <Descriptions.Item label="Stock">{product?.quantity}</Descriptions.Item>
               <Descriptions.Item label="By Age">{product?.byAge}</Descriptions.Item>
               <Descriptions.Item label="Pre-Order">{product?.isPreOrder ? 'Yes' : 'No'}</Descriptions.Item>
               <Descriptions.Item label="Pre-Order Amount">{product?.preOrderAmount || 'N/A'}</Descriptions.Item>
               <Descriptions.Item label="Promoted">{product?.isPromote ? 'Yes' : 'No'}</Descriptions.Item>
               <Descriptions.Item label="Disabled">{product?.isDisable ? 'Yes' : 'No'}</Descriptions.Item>
-              <Descriptions.Item label="Brand ID">{product?.brandId}</Descriptions.Item>
               <Descriptions.Item label="Rate">{product?.rate}</Descriptions.Item>
               <Descriptions.Item label="Description">{product?.productDescription}</Descriptions.Item>
             </Descriptions>
@@ -124,6 +124,16 @@ export default function ViewProductDetail() {
               render={({ field }) => <InputNumber {...field} className="mt-1 w-full" prefix="$" />}
             />
             {errors.productPrice && <p className="mt-1 text-sm text-red-600">{errors.productPrice.message}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Discount</label>
+            <Controller
+              name="discount"
+              control={control}
+              render={({ field }) => <InputNumber {...field} className="mt-1 w-full" />}
+            />
+            {errors.discount && <p className="mt-1 text-sm text-red-600">{errors.discount.message}</p>}
           </div>
 
           <div>

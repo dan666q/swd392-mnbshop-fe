@@ -97,9 +97,19 @@ export default function AddProduct() {
           <Controller
             name="quantity"
             control={control}
-            render={({ field }) => <InputNumber {...field} className="mt-1 w-full" />}
+            render={({ field }) => <InputNumber {...field} className="mt-1 w-full" prefix="%" />}
           />
           {errors.quantity && <p className="mt-1 text-sm text-red-600">{errors.quantity.message}</p>}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Discount</label>
+          <Controller
+            name="discount"
+            control={control}
+            render={({ field }) => <InputNumber {...field} className="mt-1 w-full" />}
+          />
+          {errors.discount && <p className="mt-1 text-sm text-red-600">{errors.discount.message}</p>}
         </div>
 
         <div>

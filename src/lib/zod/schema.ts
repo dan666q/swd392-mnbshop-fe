@@ -37,6 +37,7 @@ export const productSchema = z.object({
   preOrderAmount: z.number().optional(),
   isPromote: z.boolean(),
   isDisable: z.boolean(),
+  discount: z.number().min(0, 'Discount must be a non-negative number'),
 })
 
 export const accountSchema = z.object({

@@ -4,6 +4,7 @@ import { DefaultButtonStyle } from '@/lib/antd/antd-styles'
 import { useAppDispatch } from '@/lib/redux-toolkit/hook'
 import { closePopup } from '@/lib/redux-toolkit/slices/popup-slice'
 import { Button, Typography } from 'antd'
+import { useDeleteProduct } from './use-delete-product'
 
 interface DeleteProductProps {
   productName: string
@@ -12,8 +13,10 @@ interface DeleteProductProps {
 
 export default function DeleteProduct({ productName, productId }: DeleteProductProps) {
   const dispatch = useAppDispatch()
+  const deleteProductMutation = useDeleteProduct(productId)
+
   const handleDelete = () => {
-    console.log(productId)
+    deleteProductMutation.mutate()
     dispatch(closePopup(POPUP_TITLE.DELETE_PRODUCT))
   }
 

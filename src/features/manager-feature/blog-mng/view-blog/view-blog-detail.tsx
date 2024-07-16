@@ -1,30 +1,15 @@
-import { useState } from 'react'
-import { Typography, Button, Modal, Form, Input, InputNumber, Tag, Divider, Rate } from 'antd'
-import { EditOutlined, LikeOutlined, DislikeOutlined } from '@ant-design/icons'
 import moment from 'moment'
-import { BlogData } from '@/types'
+import { useState } from 'react'
+import { Typography, Button, Modal, Form, Input, Tag, Divider } from 'antd'
+import { EditOutlined, LikeOutlined, DislikeOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import { useViewBlogDetail } from './use-view-blog-detail'
 
 const { Title, Paragraph } = Typography
 
-const blog: BlogData = {
-  blogId: 1,
-  title: 'The Ultimate Guide to Modern Web Development',
-  content:
-    "# Web development has come a long way since the early days of the internet. Today, it's a complex and ever-evolving field that requires a diverse set of skills and knowledge.\n\nFirst, we'll dive into frontend development, covering HTML5, CSS3, and JavaScript. We'll discuss popular frameworks like React, Vue, and Angular, and how they're changing the way we build user interfaces.\n\n## Backend Development\n\nNext, we'll explore backend development, including server-side languages like Node.js, Python, and Ruby. We'll also cover databases, APIs, and microservices architecture.\n\n## DevOps\n\nFinally, we'll look at DevOps practices, cloud computing, and how they're revolutionizing the way we deploy and maintain web applications.",
-  blogImg: 'https://example.com/modern-web-dev.jpg',
-  createAt: '2023-07-01T12:00:00Z',
-  updateAt: '2023-07-02T14:30:00Z',
-  usefulVote: 142,
-  notUsefulVote: 15,
-  tags: 'web development,frontend,backend,devops',
-  userId: 123,
-}
-
 export default function ViewBlogDetail() {
   const { blogId } = useParams()
-  const { data: blog1 } = useViewBlogDetail(Number(blogId))
+  const { data: blog } = useViewBlogDetail(Number(blogId))
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [form] = Form.useForm()
 
@@ -50,15 +35,15 @@ export default function ViewBlogDetail() {
   }
 
   const formatContent = (content: string) => {
-    const sections = content.split('\n\n')
+    const sections = content.split('\\n\\n')
     return sections.map((section, index) => {
-      if (section.startsWith('# ')) {
+      if (section.startsWith('## ')) {
         return (
           <Title level={2} key={index} className="mt-8 mb-4">
             {section.slice(2)}
           </Title>
         )
-      } else if (section.startsWith('## ')) {
+      } else if (section.startsWith('### ')) {
         return (
           <Title level={3} key={index} className="mt-6 mb-3">
             {section.slice(3)}

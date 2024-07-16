@@ -1,56 +1,69 @@
-import React from 'react'
-import { Avatar, Tag, Typography, Button, List } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { Avatar, Typography, Button, List, Tag } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
+import { useViewBlogDetail } from '@/hooks/customer-hook/blog/use-blog-detail'
+import { useViewBlogList } from '@/features/manager-feature/blog-mng/view-blog/use-view-blog-list'
+import BlogCard from '@/components/customer-screen/blog/blog-card'
+import { BlogData } from '@/types'
 
 const { Title, Paragraph } = Typography
 
-const BlogDetails = () => {
-  const blog = {
-    title: 'The Journey to React Mastery',
-    author: 'Jane Doe',
-    date: 'July 3, 2024',
-    tags: ['React', 'JavaScript', 'Web Development'],
-    image: 'https://images2.thanhnien.vn/528068263637045248/2024/7/2/messi-1719907218170447457871.jpeg',
-    content:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
-  }
+type BlogDetailsParams = {
+  blogId: string
+}
 
-  const suggestions = [
-    {
-      title: 'Understanding JavaScript Closures',
-      url: '#',
-    },
-    {
-      title: 'Top 10 React Libraries to Use in 2024',
-      url: '#',
-    },
-    {
-      title: 'How to Build a Full-Stack App with the MERN Stack',
-      url: '#',
-    },
-  ]
+const BlogDetails = () => {
+  const { blogId } = useParams<BlogDetailsParams>()
+  const id = parseInt(blogId)
+  const { data: blog, isLoading, error } = useViewBlogDetail(id)
+  const { data: blogListData, isLoading: loadingBlogList, error: blogListError } = useViewBlogList()
+  const [suggestions, setSuggestions] = useState<BlogData[]>([])
+
+  useEffect(() => {
+    if (blogListData) {
+      // Shuffle blog list (if needed)
+      const shuffledBlogs = blogListData.sort(() => Math.random() - 0.5)
+      // Select a random subset for suggestions (e.g., first 3 blogs)
+      setSuggestions(shuffledBlogs.slice(0, 6))
+    }
+  }, [blogListData])
+
+  if (isLoading || loadingBlogList) return <p>Loading...</p>
+  if (error || blogListError) return <p>Error loading blog details</p>
+
+  // Ensure tags is an array
+  const tags = typeof blog?.tags === 'string' ? blog.tags.split(',') : blog?.tags || []
 
   return (
     <div className="container mx-auto my-10 p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="col-span-2">
         <div className="text-center mb-8">
           <Title level={2} className="mb-2">
-            {blog.title}
+            {blog?.title}
           </Title>
-          <img src={blog.image} alt="blog" className="mx-auto mb-4 w-full md:w-3/4" />
+          <img src={blog?.blogImg} alt="blog" className="mx-auto mb-4 w-full md:w-3/4" />
           <Typography className="">
-            <Paragraph className="mt-8">{blog.content}</Paragraph>
+            <Paragraph className="mt-8">{blog?.content}</Paragraph>
           </Typography>
           <div className="flex items-center justify-center mb-4 mt-8">
             <Avatar icon={<UserOutlined />} />
-            <span className="ml-2">{`By ${blog.author} on ${blog.date}`}</span>
+            <span className="ml-2">{`By ${blog?.author} on ${new Date(blog?.createAt).toLocaleDateString()}`}</span>
           </div>
           <div className="mt-2">
-            {blog.tags.map((tag, index) => (
+            {tags.map((tag, index) => (
               <Tag key={index} className="mb-2">
                 {tag}
               </Tag>
             ))}
+          </div>
+          <div className="mt-4 flex justify-between items-center">
+            <span>{`Created at: ${new Date(blog?.createAt).toLocaleDateString()}`}</span>
+            <span>{`Updated at: ${new Date(blog?.updateAt).toLocaleDateString()}`}</span>
+          </div>
+          <div className="mt-4 flex justify-between items-center">
+            <span>{`Useful Votes: ${blog?.usefulVote}`}</span>
+            <span>{`Not Useful Votes: ${blog?.notUsefulVote}`}</span>
           </div>
         </div>
 
@@ -66,7 +79,7 @@ const BlogDetails = () => {
           dataSource={suggestions}
           renderItem={(item) => (
             <List.Item>
-              <a href={item.url}>{item.title}</a>
+              <Link to={`/blog/${item.blogId}`}>{item.title}</Link>
             </List.Item>
           )}
         />

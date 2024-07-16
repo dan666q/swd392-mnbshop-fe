@@ -46,11 +46,11 @@ export default function CustomerHeader() {
               <span className="nav-btn__qnt">3</span>
             </a>
 
-            <a href="" className="nav-btn d-none d-md-flex">
+            {/* <a href="" className="nav-btn d-none d-md-flex">
               <img src={heart} alt="" className="icon nav-btn__icon" />
               <span className="nav-btn__title">Favorite</span>
               <span className="nav-btn__qnt">3</span>
-            </a>
+            </a> */}
 
             <ul className="navbar__list js-dropdown-list">
               <li className="navbar__item">
@@ -79,12 +79,12 @@ export default function CustomerHeader() {
                 <Search placeholder="Search" allowClear onSearch={onSearch} size="large" style={{ width: 400 }} />
               </div> */}
               <div className="top-act__group d-md-none">
-                <Link to={ROUTE_PATHS_CUSTOMER.FAVOURITE}>
+                {/* <Link to={ROUTE_PATHS_CUSTOMER.FAVOURITE}>
                   <button className="top-act__btn">
                     <img src={heart} alt="" className="icon top-act__icon" />
                     <span className="top-act__title">Favorite</span>
                   </button>
-                </Link>
+                </Link> */}
 
                 <div className="top-act__separate"></div>
 

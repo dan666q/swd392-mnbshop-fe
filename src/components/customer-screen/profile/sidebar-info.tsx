@@ -8,15 +8,14 @@ import gift2 from '@/assets/icons/gift-2.svg'
 import shield from '@/assets/icons/shield.svg'
 import { ROUTE_PATHS_CUSTOMER } from '@/router'
 import { Link } from 'react-router-dom'
-import { AuthUser } from '@/types'
 import { format } from 'date-fns'
-interface SidebarInfoProps {
-  user: AuthUser
-}
+import { useAuth } from '@/hooks/use-auth'
 
-export default function SidebarInfo({ user }: SidebarInfoProps) {
-  const formattedDateOfBirth = format(new Date(user?.data.dateOfBirth), 'yyyy-MM-dd')
+export default function SidebarInfo() {
+  const { user, loadingInitial } = useAuth()
 
+  if (loadingInitial) return <p>Loading...</p>
+  const formattedDateOfBirth = format(new Date(user?.data.dateOfBirth), 'dd MMM yyyy')
   return (
     <div className="col-3 col-xl-4 col-lg-5 col-md-12">
       <aside className="profile__sidebar">
@@ -34,23 +33,15 @@ export default function SidebarInfo({ user }: SidebarInfoProps) {
                 <span className="profile-menu__icon">
                   <img src={profile} alt="" className="icon" />
                 </span>
-                Personal info
+                Edit Personal info
               </Link>
-            </li>
-            <li>
-              <a href="#!" className="profile-menu__link">
-                <span className="profile-menu__icon">
-                  <img src={location} alt="" className="icon" />
-                </span>
-                Addresses
-              </a>
             </li>
             <li>
               <a href="#!" className="profile-menu__link">
                 <span className="profile-menu__icon">
                   <img src={message2} alt="" className="icon" />
                 </span>
-                Communications & privacy
+                Change password
               </a>
             </li>
           </ul>
@@ -60,14 +51,14 @@ export default function SidebarInfo({ user }: SidebarInfoProps) {
           <h3 className="profile-menu__title">My items</h3>
           <ul className="profile-menu__list">
             <li>
-              <a href="#!" className="profile-menu__link">
+              <Link to={ROUTE_PATHS_CUSTOMER.MY_ORDER} className="profile-menu__link">
                 <span className="profile-menu__icon">
-                  <img src={download} alt="" className="icon" />
+                  <img src={profile} alt="" className="icon" />
                 </span>
-                Reorder
-              </a>
+                My Orders
+              </Link>
             </li>
-            <li>
+            {/* <li>
               <a href="#!" className="profile-menu__link">
                 <span className="profile-menu__icon">
                   <img src={heart} alt="" className="icon" />
@@ -82,7 +73,7 @@ export default function SidebarInfo({ user }: SidebarInfoProps) {
                 </span>
                 Registries
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
 

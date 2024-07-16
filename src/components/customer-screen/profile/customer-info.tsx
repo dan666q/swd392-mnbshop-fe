@@ -1,14 +1,14 @@
+import { useAuth } from '@/hooks/use-auth'
 import { AuthUser } from '@/types'
 import { Card, Row, Col, Typography } from 'antd'
 import { format } from 'date-fns'
 
-interface CustomerInfoProps {
-  user: AuthUser
-}
-
 const { Title, Text } = Typography
 
-const CustomerInfo: React.FC<CustomerInfoProps> = ({ user }) => {
+export default function CustomerInfo() {
+  const { user, loadingInitial } = useAuth()
+
+  if (loadingInitial) return <p>Loading...</p>
   const formattedDateOfBirth = format(new Date(user?.data.dateOfBirth), 'yyyy-MM-dd')
 
   // Function to convert boolean gender to string
@@ -47,5 +47,3 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ user }) => {
     </div>
   )
 }
-
-export default CustomerInfo

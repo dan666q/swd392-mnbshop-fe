@@ -14,6 +14,7 @@ export default function ViewListOrder() {
       }
     })
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataWithKeys: any = (data && addKeyToData(data)) || []
 
   return (

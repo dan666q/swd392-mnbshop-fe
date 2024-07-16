@@ -1,5 +1,9 @@
 import Popup from '@/components/manager-screen/popup'
-import DeleteProduct from '@/features/manager-feature/product-mng/delete-product'
+import DisableAccount from '@/features/manager-feature/account-mng/delete-account/disable-account'
+import DeleteBrand from '@/features/manager-feature/brand-mng/delete-brand/delete-brand'
+import DeleteBlog from '@/features/manager-feature/blog-mng/delete-blog/delete-blog'
+import DeletePromotion from '@/features/manager-feature/promotion-mng/delete-promotion/delete-promotion'
+import DeleteProduct from '@/features/manager-feature/product-mng/delete-product/delete-product'
 import {
   GiftOutlined,
   UserOutlined,
@@ -15,10 +19,6 @@ import { MenuItem } from '@/types'
 import { ROUTE_PATHS_MANAGER } from '@/router'
 import { Link } from 'react-router-dom'
 import { POPUP_TITLE } from '.'
-import DisableAccount from '@/features/manager-feature/account-mng/delete-account/disable-account'
-import DeleteBrand from '@/features/manager-feature/brand-mng/delete-brand/delete-brand'
-import DeleteBlog from '@/features/manager-feature/blog-mng/delete-blog'
-import DeletePromotion from '@/features/manager-feature/promotion-mng/delete-promotion/delete-promotion'
 
 // TODO: eslint-disable
 // eslint-disable-next-line react-refresh/only-export-components

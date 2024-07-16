@@ -26,12 +26,17 @@ export const editProfileTemplateSchema = z.object({
 })
 
 export const productSchema = z.object({
-  name: z.string().min(1, 'Product name is required'),
-  category: z.string().min(1, 'Category is required'),
-  price: z.number().min(0, 'Price must be a positive number'),
-  stock: z.number().int().min(0, 'Stock must be a non-negative integer'),
-  status: z.enum(['Active', 'Inactive']),
-  description: z.string().min(1, 'Description is required'),
+  productName: z.string().min(1, 'Product name is required'),
+  brandId: z.number(),
+  productDescription: z.string().min(1, 'Product description is required'),
+  productImg: z.string().url('Product image must be a valid URL'),
+  productPrice: z.number().min(0, 'Product price must be a positive number or zero'),
+  quantity: z.number().int().min(0, 'Quantity must be a non-negative integer'),
+  byAge: z.number().int().min(0, 'Age must be a non-negative integer'),
+  isPreOrder: z.boolean().optional(),
+  preOrderAmount: z.number().optional(),
+  isPromote: z.boolean(),
+  isDisable: z.boolean(),
 })
 
 export const accountSchema = z.object({

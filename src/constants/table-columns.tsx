@@ -80,6 +80,16 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     render: (quantity) => <span>{quantity}</span>,
   },
   {
+    title: 'STATUS',
+    dataIndex: 'isDisable',
+    key: 'isDisable',
+    width: 140,
+    align: 'center',
+    render: (isDisable) => {
+      return <Tag color={isDisable ? 'error' : 'success'}>{isDisable ? 'Disabled' : 'Active'}</Tag>
+    },
+  },
+  {
     title: 'Action',
     key: 'operation',
     width: 90,

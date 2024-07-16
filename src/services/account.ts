@@ -42,11 +42,22 @@ const updateAccount = async (id: number, data: FormData) => {
   }
 }
 
+const addAccount = async (data: FormData) => {
+  try {
+    const { data: response } = await apiInstance.post(import.meta.env.VITE_ACCOUNT_CREATE_API, data)
+    return response
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
 const accountApi = {
   getListAccount,
   getAccountById,
   disableAccount,
   updateAccount,
+  addAccount,
 }
 
 export default accountApi

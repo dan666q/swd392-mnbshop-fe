@@ -96,7 +96,7 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     align: 'center',
 
     render: (record) => {
-      return <Dropdown items={ViewProductDropdown(record.productName, record.productId)} />
+      return <Dropdown items={ViewProductDropdown(record.productName, record.productId, record.isDisable)} />
     },
   },
 ]
@@ -214,8 +214,8 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     key: 'isDisable',
     width: 90,
     align: 'center',
-    render: (record) => {
-      return record ? <span className="text-red-500">Yes</span> : <span className="text-green-500">No</span>
+    render: (isDisable) => {
+      return <Tag color={isDisable ? 'error' : 'success'}>{isDisable ? 'Disabled' : 'Active'}</Tag>
     },
   },
   {
@@ -239,7 +239,7 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     width: 90,
     align: 'center',
     render: (record) => {
-      return <Dropdown items={ViewAccountDropdown(record.fullName, record.id)} />
+      return <Dropdown items={ViewAccountDropdown(record.fullName, record.id, record.isDisable)} />
     },
   },
 ]

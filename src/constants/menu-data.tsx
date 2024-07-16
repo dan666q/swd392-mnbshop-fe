@@ -60,7 +60,7 @@ export const NavigatorItems: MenuItem[] = [
   },
 ]
 
-export const ViewProductDropdown = (productName: string, productId: string): MenuItem[] => [
+export const ViewProductDropdown = (productName: string, productId: string, isDisabled: boolean): MenuItem[] => [
   {
     label: <Link to={productId}>Edit Product</Link>,
     key: 'edit',
@@ -74,7 +74,7 @@ export const ViewProductDropdown = (productName: string, productId: string): Men
         title={POPUP_TITLE.DELETE_PRODUCT}
         content={<DeleteProduct productName={productName} productId={productId} />}
       >
-        Delete Product
+        {isDisabled ? 'Enable Product' : 'Disable Product'}
       </Popup>
     ),
     key: 'delete',
@@ -112,7 +112,7 @@ export const ViewOrderDropdown = (orderId: string): MenuItem[] => [
   },
 ]
 
-export const ViewAccountDropdown = (fullName: string, id: number): MenuItem[] => [
+export const ViewAccountDropdown = (fullName: string, id: number, isDisabled: boolean): MenuItem[] => [
   {
     label: <Link to={`${ROUTE_PATHS_MANAGER.M_ACCOUNT}/${id}`}>Edit Account</Link>,
     key: 'edit',
@@ -126,7 +126,7 @@ export const ViewAccountDropdown = (fullName: string, id: number): MenuItem[] =>
         title={POPUP_TITLE.DISABLE_ACCOUNT}
         content={<DisableAccount fullName={fullName} id={id} />}
       >
-        Disable Account
+        {isDisabled ? 'Enable Account' : 'Disable Account'}
       </Popup>
     ),
     key: 'delete',

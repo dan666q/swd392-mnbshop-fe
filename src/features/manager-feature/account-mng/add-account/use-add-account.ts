@@ -3,19 +3,20 @@ import accountApi from '@/services/account'
 import { useMutation } from '@tanstack/react-query'
 import { notification } from 'antd'
 
-export const useDisableAccount = (id: number) => {
+export const useAddAccount = () => {
   return useMutation({
-    mutationFn: () => accountApi.disableAccount(id),
+    mutationFn: (data: FormData) => {
+      return accountApi.addAccount(data)
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['accountList'] })
-      queryClient.invalidateQueries({ queryKey: ['viewAccountDetail'] })
       notification.success({
-        message: 'Disable success',
+        message: 'Add success',
       })
     },
     onError: () => {
       notification.error({
-        message: 'Disable failed',
+        message: 'Add failed',
       })
     },
   })

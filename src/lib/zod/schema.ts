@@ -51,6 +51,20 @@ export const accountSchema = z.object({
   roleId: z.number(),
 })
 
+export const createAccountSchema = z.object({
+  username: z.string(),
+  password: z.string(),
+  fullName: z.string(),
+  // dateOfBirth: z.string(),
+  gender: z.boolean(),
+  address: z.string(),
+  phone: z.string(),
+  image: z.string().default('https://greekherald.com.au/wp-content/uploads/2020/07/default-avatar.png'),
+  status: z.string(),
+  isDisable: z.boolean().default(false),
+  email: z.string(),
+})
+
 export const signUpSchema = z
   .object({
     username: z.string().min(3, 'Username must be at least 3 characters'),

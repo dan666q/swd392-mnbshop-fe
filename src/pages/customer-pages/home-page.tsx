@@ -1,5 +1,5 @@
 import BlogsSection from '@/components/customer-screen/blog/blogs-section'
-import CategoriesSection from '@/components/customer-screen/categories/categories-section'
+import BrandSection from '@/components/customer-screen/brands-section/brand-section'
 import ProductSection from '@/components/customer-screen/product/product-section'
 import SlideShow from '@/components/customer-screen/slideshow'
 
@@ -8,7 +8,7 @@ export default function HomePage() {
     <div>
       <div className="container home">
         <SlideShow />
-        <CategoriesSection />
+        <BrandSection />
         <ProductSection />
         <BlogsSection />
       </div>

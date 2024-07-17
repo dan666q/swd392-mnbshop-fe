@@ -15,6 +15,11 @@ const OrderTable = () => {
   if (isLoading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
 
+  // Check if user data is available
+  if (!user || !user.data) {
+    return <p>User data not available</p>
+  }
+
   // Filter orderList to show only orders belonging to the logged-in user
   const userOrderList = orderList.filter((order) => order.userId === user.data.id)
 

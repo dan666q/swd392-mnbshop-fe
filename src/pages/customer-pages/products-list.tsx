@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ProductCard from '@/components/customer-screen/product/product-card'
 import FilterForm from '@/components/customer-screen/filter-form'
-import CategoriesSection from '@/components/customer-screen/categories/categories-section'
+import CategoriesSection from '@/components/customer-screen/brands-section/brand-section'
 import { useViewProductList } from '@/features/manager-feature/product-mng/view-product/use-view-product'
 import { ProductDetail } from '@/types'
 

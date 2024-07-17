@@ -29,20 +29,20 @@ export default function SidebarInfo() {
           <h3 className="profile-menu__title">Manage Account</h3>
           <ul className="profile-menu__list">
             <li>
-              <Link to={ROUTE_PATHS_CUSTOMER.EDIT_PROFILE} className="profile-menu__link">
+              <Link to={ROUTE_PATHS_CUSTOMER.PROFILE} className="profile-menu__link">
                 <span className="profile-menu__icon">
                   <img src={profile} alt="" className="icon" />
                 </span>
-                Edit Personal info
+                Personal info
               </Link>
             </li>
             <li>
-              <a href="#!" className="profile-menu__link">
+              <Link to={ROUTE_PATHS_CUSTOMER.EDIT_PROFILE} className="profile-menu__link">
                 <span className="profile-menu__icon">
                   <img src={message2} alt="" className="icon" />
                 </span>
-                Change password
-              </a>
+                Edit Personal info
+              </Link>
             </li>
           </ul>
         </div>

@@ -1,5 +1,4 @@
 import { useAuth } from '@/hooks/use-auth'
-import { AuthUser } from '@/types'
 import { Card, Row, Col, Typography } from 'antd'
 import { format } from 'date-fns'
 
@@ -22,24 +21,36 @@ export default function CustomerInfo() {
         <Card title="Account Information" className="rounded-lg shadow-lg">
           <Row gutter={[16, 24]} className="text-gray-700">
             <Col span={12}>
-              <Title level={4} className="mb-4">
-                <span className="font-semi">Username:</span> <span className="text-3xl">{user?.data.username}</span>
-              </Title>
-              <Title level={4} className="mb-4">
-                <span className="font-bold">Full Name:</span> <span className="text-3xl">{user?.data.fullName}</span>
-              </Title>
-              <Title level={4} className="mb-4">
-                <span className="font-bold">Gender:</span>{' '}
-                <span className="text-3xl">{getGenderLabel(user?.data.gender)}</span>
-              </Title>
+              <div className="mb-4">
+                <Title level={5}>Username:</Title>
+                <Text className="text-3xl">{user?.data.username}</Text>
+              </div>
+              <div className="mb-4">
+                <Title level={5}>Full Name:</Title>
+                <Text className="text-3xl">{user?.data.fullName}</Text>
+              </div>
+              <div className="mb-4">
+                <Title level={5}>Gender:</Title>
+                <Text className="text-3xl">{getGenderLabel(user?.data.gender)}</Text>
+              </div>
+              <div className="mb-4">
+                <Title level={5}>Date of Birth:</Title>
+                <Text className="text-3xl">{formattedDateOfBirth}</Text>
+              </div>
             </Col>
             <Col span={12}>
-              <Title level={4} className="mb-4">
-                <span className="font-bold">Address:</span> <span className="text-3xl">{user?.data.address}</span>
-              </Title>
-              <Title level={4} className="mb-4">
-                <span className="font-bold">Phone:</span> <span className="text-3xl">{user?.data.phone}</span>
-              </Title>
+              <div className="mb-4">
+                <Title level={5}>Address:</Title>
+                <Text className="text-3xl">{user?.data.address}</Text>
+              </div>
+              <div className="mb-4">
+                <Title level={5}>Phone:</Title>
+                <Text className="text-3xl">{user?.data.phone}</Text>
+              </div>
+              <div className="mb-4">
+                <Title level={5}>Email:</Title>
+                <Text className="text-3xl">{user?.data.email}</Text>
+              </div>
             </Col>
           </Row>
         </Card>

@@ -55,7 +55,7 @@ export const createAccountSchema = z.object({
   username: z.string(),
   password: z.string(),
   fullName: z.string(),
-  // dateOfBirth: z.string(),
+  dateOfBirth: z.string(),
   gender: z.boolean(),
   address: z.string(),
   phone: z.string(),

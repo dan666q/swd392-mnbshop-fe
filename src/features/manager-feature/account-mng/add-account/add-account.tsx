@@ -24,11 +24,7 @@ export default function AddAccount() {
   })
 
   const handleOk = handleSubmit((data) => {
-    const formatData = {
-      ...data,
-      dateOfBirth: '2024-07-16T19:15:32.094Z',
-    }
-    addAccountMutation.mutate(formatData)
+    addAccountMutation.mutate(data)
     dispatch(closePopup(POPUP_TITLE.ADD_ACCOUNT))
     reset()
   })
@@ -53,23 +49,23 @@ export default function AddAccount() {
           <Controller name="fullName" control={control} render={({ field }) => <Input {...field} />} />
         </Form.Item>
 
-        {/* <Form.Item label="Date of Birth" validateStatus={errors.dateOfBirth ? 'error' : ''}>
+        <Form.Item label="Date of Birth" validateStatus={errors.dateOfBirth ? 'error' : ''}>
           <Controller
             name="dateOfBirth"
             control={control}
             render={({ field }) => (
               <DatePicker
                 {...field}
-                format="DD/MM/YYYY"
-                value={field.value ? moment(field.value, 'DD/MM/YYYY') : null}
+                format="YYYY-MM-DD"
+                value={field.value ? moment(field.value, 'YYYY-MM-DD') : null}
                 onChange={(date) => {
-                  const formattedDate = date ? date.format('DD/MM/YYYY') : ''
+                  const formattedDate = date ? date.format('YYYY-MM-DD') : ''
                   field.onChange(formattedDate)
                 }}
               />
             )}
           />
-        </Form.Item> */}
+        </Form.Item>
 
         <Form.Item label="Gender" validateStatus={errors.gender ? 'error' : ''}>
           <Controller
@@ -85,7 +81,7 @@ export default function AddAccount() {
         </Form.Item>
 
         <Form.Item label="Address" validateStatus={errors.address ? 'error' : ''}>
-          <Controller name="address" control={control} render={({ field }) => <Input.TextArea {...field} rows={2} />} />
+          <Controller name="address" control={control} render={({ field }) => <Input {...field} />} />
         </Form.Item>
 
         <Form.Item label="Phone" validateStatus={errors.phone ? 'error' : ''}>
@@ -96,7 +92,7 @@ export default function AddAccount() {
           <Controller name="image" control={control} render={({ field }) => <Input {...field} />} />
         </Form.Item>
 
-        <Form.Item label="Status" validateStatus={errors.status ? 'error' : ''}>
+        {/* <Form.Item label="Status" validateStatus={errors.status ? 'error' : ''}>
           <Controller
             name="status"
             control={control}
@@ -107,7 +103,7 @@ export default function AddAccount() {
               </Select>
             )}
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item label="Is Disabled" validateStatus={errors.isDisable ? 'error' : ''}>
           <Controller

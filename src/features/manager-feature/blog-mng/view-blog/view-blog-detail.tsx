@@ -4,14 +4,17 @@ import { Typography, Button, Modal, Form, Input, Tag, Divider } from 'antd'
 import { EditOutlined, LikeOutlined, DislikeOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import { useViewBlogDetail } from './use-view-blog-detail'
+import { useEditBlog } from '../edit-blog/use-edit-blog'
 
 const { Title, Paragraph } = Typography
 
 export default function ViewBlogDetail() {
+  const userId = localStorage.getItem('userId')
   const { blogId } = useParams()
   const { data: blog } = useViewBlogDetail(Number(blogId))
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [form] = Form.useForm()
+  const useEditBlogMutation = useEditBlog(Number(userId), Number(blogId))
 
   const showModal = () => {
     form.setFieldsValue(blog)
@@ -23,6 +26,7 @@ export default function ViewBlogDetail() {
       .validateFields()
       .then((values) => {
         console.log('Updated blog:', values)
+        useEditBlogMutation.mutate(values)
         setIsModalVisible(false)
       })
       .catch((info) => {

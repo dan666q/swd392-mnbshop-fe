@@ -4,16 +4,19 @@ import { DefaultButtonStyle } from '@/lib/antd/antd-styles'
 import { useAppDispatch } from '@/lib/redux-toolkit/hook'
 import { closePopup } from '@/lib/redux-toolkit/slices/popup-slice'
 import { Button, Typography } from 'antd'
+import { useDeleteBlog } from './use-delete-blog'
 
 interface DeleteBlogProps {
   title: string
-  blogId: string
+  blogId: number
 }
 
 export default function DeleteBlog({ title, blogId }: DeleteBlogProps) {
   const dispatch = useAppDispatch()
+  const useDeleteBlogMutation = useDeleteBlog()
   const handleDelete = () => {
     console.log(blogId)
+    useDeleteBlogMutation.mutate(blogId)
     dispatch(closePopup(POPUP_TITLE.DELETE_BLOG))
   }
   return (

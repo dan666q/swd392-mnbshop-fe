@@ -22,9 +22,45 @@ const getBlogById = async (id: number) => {
   }
 }
 
+const deleteBlog = async (id: number) => {
+  try {
+    const { data } = await apiInstance.delete(import.meta.env.VITE_BLOG_DELETE_API + id)
+    return data
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
+const updateBlog = async (userId: number, blogId: number, data: FormData) => {
+  try {
+    const { data: response } = await apiInstance.put(
+      import.meta.env.VITE_BLOG_UPDATE_API + +userId + '?blogId=' + blogId,
+      data
+    )
+    return response
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
+const createBlog = async (data: FormData) => {
+  try {
+    const { data: response } = await apiInstance.post(import.meta.env.VITE_BLOG_CREATE_API, data)
+    return response
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
 const blogApi = {
   getBlogList,
   getBlogById,
+  deleteBlog,
+  updateBlog,
+  createBlog,
 }
 
 export default blogApi

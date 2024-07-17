@@ -19,7 +19,7 @@ export default function BlogManager() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <ConfigAntdTheme theme={GreenButtonStyle}>
-                <Popup width={500} type="form" title={POPUP_TITLE.ADD_BLOG} content={<AddBlog />}>
+                <Popup width={800} type="form" title={POPUP_TITLE.ADD_BLOG} content={<AddBlog />}>
                   <Button type="primary" icon={<PlusCircleOutlined />}>
                     Add new
                   </Button>

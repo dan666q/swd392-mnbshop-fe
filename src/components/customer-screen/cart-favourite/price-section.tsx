@@ -1,6 +1,7 @@
 import gift from '@/assets/icons/gift.svg'
 import { useCreateOrder } from '@/hooks/customer-hook/cart/use-create-order'
 import { notification } from 'antd'
+import { Link } from 'react-router-dom'
 
 interface PriceSectionProps {
   totalItem: number
@@ -50,7 +51,7 @@ export default function PriceSection({ totalItem, totalPrice, cartId }: PriceSec
           onClick={() => handleOrder(cartId, totalItem)}
           className="cart-info__next-btn btn btn--primary btn--rounded"
         >
-          Continue to checkout
+          <Link to="/checkout">Checkout</Link>
         </button>
       </div>
       <div className="cart-info">

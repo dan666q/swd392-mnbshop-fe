@@ -6,6 +6,9 @@ export const REFRESH_TOKEN_KEY = 'RefreshToken'
 
 const apiInstance = axios.create({
   baseURL: import.meta.env.VITE_API_SECRET,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
 
 apiInstance.interceptors.request.use(

@@ -16,6 +16,7 @@ export const useAuth = () => {
     const decodedToken = jwtDecode<DecodedToken>(token)
     return decodedToken
   }
+
   const {
     data: user,
     isLoading: loadingInitial,
@@ -45,6 +46,9 @@ export const useAuth = () => {
       if (roleId == '1') {
         console.log('Manager')
         navigate(ROUTE_PATHS_MANAGER.DASHBOARD)
+      } else if (roleId == '2') {
+        console.log('Staff')
+        navigate(ROUTE_PATHS_MANAGER.M_ORDER)
       } else {
         console.log('User')
         navigate(ROUTE_PATHS.ROOT)

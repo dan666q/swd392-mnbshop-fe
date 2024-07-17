@@ -54,7 +54,7 @@ export default function ViewBlogDetail() {
           </Title>
         )
       } else if (section.startsWith('- ')) {
-        const items = section.split('\n')
+        const items = section.split('\\n')
         return (
           <ul key={index} className="list-disc pl-5 mb-4">
             {items.map((item, i) => (

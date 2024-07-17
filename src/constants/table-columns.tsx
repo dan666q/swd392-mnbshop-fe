@@ -358,6 +358,9 @@ export const VIEW_BLOG_COLS: TableColumnsType<BlogTableData> = [
     dataIndex: 'usefulVote',
     key: 'usefulVote',
     align: 'center',
+    render: (usefulVote) => {
+      return <span>{usefulVote ? usefulVote : 0}</span>
+    },
   },
   {
     title: 'Action',

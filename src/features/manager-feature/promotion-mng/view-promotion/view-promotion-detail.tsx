@@ -80,14 +80,15 @@ export default function ViewPromotionDetail() {
       ),
     },
     {
-      title: 'Brand',
-      dataIndex: 'productBrand',
-      key: 'productBrand',
-    },
-    {
       title: 'Quantity',
       dataIndex: 'quantity',
       key: 'quantity',
+    },
+    {
+      title: 'Discount',
+      dataIndex: 'discount',
+      key: 'discount',
+      render: (discount: number) => `${discount ? discount : 0}%`,
     },
     {
       title: 'Price',

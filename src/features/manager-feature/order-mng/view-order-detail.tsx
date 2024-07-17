@@ -1,15 +1,26 @@
-import { ProductInOrder } from '@/types'
-import { Card, Descriptions, Table, Tag, Typography, Image } from 'antd'
 import dayjs from 'dayjs'
+import EditOrder from './edit-order-status/edit-order'
+import Popup from '@/components/manager-screen/popup'
+import { DecodedToken, ProductInOrder } from '@/types'
+import { Card, Descriptions, Table, Tag, Typography, Image, Button } from 'antd'
 import { useParams } from 'react-router-dom'
 import { useViewOrderDetail } from './use-view-order-detail'
+import { POPUP_TITLE } from '@/constants'
+import { jwtDecode } from 'jwt-decode'
+import { TOKEN_KEY } from '@/lib/axios'
 
 const { Title } = Typography
+
+const decodeToken = (token: string) => {
+  const decodedToken = jwtDecode<DecodedToken>(token)
+  return decodedToken
+}
 
 export default function ViewOrderDetail() {
   const { orderId } = useParams()
   const orderIdNumber = orderId ? parseInt(orderId, 10) : 0
   const { data: order } = useViewOrderDetail(orderIdNumber)
+  const roleId = decodeToken(localStorage.getItem(TOKEN_KEY) || '').RoleId
 
   const columns = [
     {
@@ -58,7 +69,14 @@ export default function ViewOrderDetail() {
 
   return (
     <div className="p-6">
-      <Title level={2}>Order Details</Title>
+      <div className="flex justify-between">
+        <Title level={2}>Order Details</Title>
+        {roleId == '2' ? (
+          <Popup width={500} type="confirm" title={POPUP_TITLE.UPDATE_ORDER} content={EditOrder(orderIdNumber)}>
+            <Button type="primary">Update Order</Button>
+          </Popup>
+        ) : null}
+      </div>
       <Card className="mb-6">
         <Descriptions title="Order Information" bordered>
           <Descriptions.Item label="Order ID">{order?.orderId}</Descriptions.Item>

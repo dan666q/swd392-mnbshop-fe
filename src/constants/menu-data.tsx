@@ -60,6 +60,20 @@ export const NavigatorItems: MenuItem[] = [
   },
 ]
 
+// eslint-disable-next-line react-refresh/only-export-components
+export const NavigatorItemsStaff: MenuItem[] = [
+  {
+    label: 'Orders',
+    key: '/orders' || ROUTE_PATHS_MANAGER.M_ORDER,
+    icon: <ShoppingCartOutlined />,
+  },
+  {
+    label: 'Blogs',
+    key: '/blogs' || ROUTE_PATHS_MANAGER.M_BLOG,
+    icon: <ReadOutlined />,
+  },
+]
+
 export const ViewProductDropdown = (productName: string, productId: string, isDisabled: boolean): MenuItem[] => [
   {
     label: <Link to={productId}>Edit Product</Link>,
@@ -134,9 +148,9 @@ export const ViewAccountDropdown = (fullName: string, id: number, isDisabled: bo
   },
 ]
 
-export const ViewBlogDropdown = (title: string, blogId: string): MenuItem[] => [
+export const ViewBlogDropdown = (title: string, blogId: number): MenuItem[] => [
   {
-    label: <Link to={blogId}>Edit Blog</Link>,
+    label: <Link to={`${ROUTE_PATHS_MANAGER.M_BLOG}/${blogId}`}>Edit Blog</Link>,
     key: 'edit',
     icon: <EditOutlined />,
   },

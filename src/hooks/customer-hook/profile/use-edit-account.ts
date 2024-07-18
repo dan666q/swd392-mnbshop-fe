@@ -21,6 +21,7 @@ const useEditAccount = (userId) => {
       notification.success({
         message: 'Account updated successfully',
       });
+      window.location.reload(); // Reload the current page
     },
   });
 };

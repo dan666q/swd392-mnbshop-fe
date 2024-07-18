@@ -5,15 +5,28 @@ import { useViewProductList } from '@/features/manager-feature/product-mng/view-
 import { Spin } from 'antd'
 import { ProductDetail } from '@/types'
 
-export default function ProductSection() {
-  const { data, isLoading } = useViewProductList()
+const ProductSection = () => {
+  const { data, isLoading, error } = useViewProductList()
 
   if (isLoading) {
     return <Spin tip="Loading..." />
   }
 
-  // Filter products based on rate (for example, only show products with rate >= 4)
-  const filteredProducts = data.filter((product) => product.rate >= 4)
+  if (error) {
+    return <div>Error loading products: {error.message}</div>
+  }
+
+  // Check the data structure and types
+  console.log('Fetched products:', data)
+
+  // Ensure rate is a number
+  const filteredProducts = data
+    .map((product) => ({
+      ...product,
+      rate: typeof product.rate === 'string' ? parseFloat(product.rate) : product.rate,
+    }))
+    .sort((a, b) => b.rate - a.rate) // Sort by rate descending
+    .slice(0, 4) // Take the top 4 products
 
   return (
     <div>
@@ -23,7 +36,7 @@ export default function ProductSection() {
           <ViewMore />
         </div>
         <div className="row row-cols-4 row-cols-lg-2 row-cols-sm-1 gy-3 g-lg-3 g-md-2">
-          {filteredProducts?.map((product: ProductDetail) => (
+          {filteredProducts.map((product: ProductDetail) => (
             <ProductCard key={product.productId} {...product} />
           ))}
         </div>
@@ -31,3 +44,5 @@ export default function ProductSection() {
     </div>
   )
 }
+
+export default ProductSection

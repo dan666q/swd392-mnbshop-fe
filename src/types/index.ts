@@ -225,6 +225,68 @@ export type PromotionData = {
   promotionImg: string
 }
 
+// Define a type for Feedback
+export type Feedback = {
+  feedbackId: number;
+  rate: number;
+  comment: string;
+  replyId: number;
+  createAt: string;
+  updateAt: string;
+  productId: number;
+  userId: number;
+  orderId: number;
+};
+
+// Define a type for Feedback API response
+export type FeedbackAPIResponse = {
+  message: string;
+  httpStatus: string;
+  timeStamp: Date;
+  data: Feedback;
+};
+
+// Define a type for a list of Feedbacks API response
+export type FeedbackListAPIResponse = {
+  message: string;
+  httpStatus: string;
+  timeStamp: Date;
+  data: Feedback[];
+};
+
+export type FeedbackReply = {
+  replyId: number;
+  feedbackId: number;
+  comment: string;
+  createAt: string;
+  updateAt: string;
+  userId: number;
+};
+
+export type FeedbackReplyAPIResponse = {
+  message: string;
+  httpStatus: string;
+  timeStamp: Date;
+  data: FeedbackReply;
+};
+
+export type FeedbackReplyListAPIResponse = {
+  message: string;
+  httpStatus: string;
+  timeStamp: Date;
+  data: FeedbackReply[];
+};
+export type CreateFeedback = Omit<Feedback, 'feedbackId' | 'createAt' | 'updateAt'>;
+
+//vote type
+export type VoteBlog = {
+  voteId: number;
+  voteType: boolean;
+  blogId: number;
+  userId: number;
+};
+
+
 // API Response
 export type CustomErrorAPIResponse = {
   statusCode: number
@@ -372,3 +434,16 @@ export type PromotionFieldInput = {
   promote: number
   promotionImg: string
 }
+export type VoteBlogAPIResponse = {
+  message: string;
+  httpStatus: string;
+  timeStamp: Date;
+  data: VoteBlog;
+};
+
+export type UpdateVoteBlogAPIResponse = {
+  message: string;
+  httpStatus: string;
+  timeStamp: Date;
+  data: VoteBlog;
+};

@@ -257,7 +257,7 @@ export default function ProductDetail() {
                           )}
                         />
 
-                        <Card className="mb-8">
+                        {/* <Card className="mb-8">
                           <h3>Write a Review</h3>
                           <Form onFinish={handleSubmitReview}>
                             <Form.Item name="rating" rules={[{ required: true, message: 'Please rate the product' }]}>
@@ -272,7 +272,7 @@ export default function ProductDetail() {
                               </Button>
                             </Form.Item>
                           </Form>
-                        </Card>
+                        </Card> */}
                       </div>
                     </div>
                   </div>

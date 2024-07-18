@@ -15,7 +15,7 @@ const BlogsSection = () => {
   // Sort blogs by creation date (assuming a field like `createdAt` in BlogData)
   const sortedData = data?.sort((a: BlogData, b: BlogData) => {
     // Assuming createdAt is a Date object
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    return new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
   })
 
   // Take the latest 4 blogs

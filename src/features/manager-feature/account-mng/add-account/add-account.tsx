@@ -92,7 +92,7 @@ export default function AddAccount() {
           <Controller name="image" control={control} render={({ field }) => <Input {...field} />} />
         </Form.Item>
 
-        {/* <Form.Item label="Status" validateStatus={errors.status ? 'error' : ''}>
+        <Form.Item label="Status" validateStatus={errors.status ? 'error' : ''}>
           <Controller
             name="status"
             control={control}
@@ -103,7 +103,7 @@ export default function AddAccount() {
               </Select>
             )}
           />
-        </Form.Item> */}
+        </Form.Item>
 
         <Form.Item label="Is Disabled" validateStatus={errors.isDisable ? 'error' : ''}>
           <Controller

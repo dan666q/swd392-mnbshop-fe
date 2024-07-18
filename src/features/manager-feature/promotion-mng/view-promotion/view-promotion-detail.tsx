@@ -23,14 +23,34 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { promotionSchema } from '@/lib/zod/schema'
 import { useUpdatePromotion } from '../update-promotion/use-update-promotion'
-import { ProductInPromotion } from '@/types'
+import { ProductDetail, ProductInPromotion, ProductTableData } from '@/types'
+import Popup from '@/components/manager-screen/popup'
+import DeleteProductPromotion from '../delete-promotion/delete-product-promotion'
+import { POPUP_TITLE } from '@/constants'
+import { useViewProductList } from '../../product-mng/view-product/use-view-product'
+import { VIEW_PRODUCT_PROMOTION_COLS } from '@/constants/table-columns'
 
 type FormData = z.infer<typeof promotionSchema>
 
 export default function ViewPromotionDetail() {
   const { promotionId } = useParams()
+  const [isAddProductModalVisible, setIsAddProductModalVisible] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const { data: promotion } = useViewPromotionDetail(Number(promotionId))
+  const { data: product } = useViewProductList()
+
+  const addKeyToData = (dataArray: ProductTableData[] | ProductDetail[] | null) => {
+    if (!dataArray) return []
+    return dataArray.map((item: ProductTableData | ProductDetail) => {
+      return {
+        ...item,
+        key: item.productId,
+      }
+    })
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dataWithKeys: any = (product && addKeyToData(product)) || []
+
   const UpdatePromotionMutation = useUpdatePromotion(Number(promotionId))
 
   const {
@@ -46,6 +66,10 @@ export default function ViewPromotionDetail() {
   const showEditModal = () => {
     reset(promotion)
     setIsModalVisible(true)
+  }
+
+  const showAddProductModal = () => {
+    setIsAddProductModalVisible(true)
   }
 
   const onSubmit = async (data: FormData | any) => {
@@ -99,22 +123,45 @@ export default function ViewPromotionDetail() {
     {
       title: 'Action',
       key: 'action',
-      render: () => (
-        <Button type="primary" danger>
-          Delete
-        </Button>
+      render: (record: ProductInPromotion) => (
+        <Popup
+          width={430}
+          type="confirm"
+          title={POPUP_TITLE.DELETE_PRODUCT_PROMOTION}
+          content={<DeleteProductPromotion promotionId={promotionId} productId={record.productId} />}
+        >
+          <Button type="primary" danger>
+            Delete
+          </Button>
+        </Popup>
       ),
     },
   ]
+
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    setSelectedRowKeys(newSelectedRowKeys)
+  }
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  }
 
   return (
     <div className="w-9/12 mx-auto p-4">
       <Card
         title={<h2 className="text-2xl font-bold">{promotion?.promotionName}</h2>}
         extra={
-          <Button type="primary" icon={<EditOutlined />} onClick={showEditModal}>
-            Edit
-          </Button>
+          <div>
+            <Button type="default" icon={<EditOutlined />} onClick={showAddProductModal} className="mr-2">
+              Add product
+            </Button>
+            <Button type="primary" icon={<EditOutlined />} onClick={showEditModal}>
+              Edit
+            </Button>
+          </div>
         }
         cover={
           <Image alt={promotion?.promotionName} src={promotion?.promotionImg} className="object-cover h-48 w-6/12" />
@@ -220,6 +267,26 @@ export default function ViewPromotionDetail() {
           >
             <Controller name="promotionImg" control={control} render={({ field }) => <Input {...field} />} />
           </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        width={1200}
+        title="Add Products to Promotion"
+        visible={isAddProductModalVisible}
+        onOk={() => {
+          // Xử lý logic thêm sản phẩm vào đây
+          setIsAddProductModalVisible(false)
+        }}
+        onCancel={() => setIsAddProductModalVisible(false)}
+      >
+        <Form layout="vertical">
+          <Table
+            columns={VIEW_PRODUCT_PROMOTION_COLS}
+            dataSource={dataWithKeys}
+            pagination={{ pageSize: 5 }}
+            rowSelection={rowSelection}
+          />
         </Form>
       </Modal>
     </div>

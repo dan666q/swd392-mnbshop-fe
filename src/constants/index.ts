@@ -87,6 +87,10 @@ export const POPUP_TITLE = {
   ADD_PROMOTION: 'Add new promotion',
   UPDATE_PROMOTION: 'Update promotion',
   DELETE_PROMOTION: 'Delete promotion',
+
+  ADD_PRODUCT_PROMOTION: 'Add new product promotion',
+  UPDATE_PRODUCT_PROMOTION: 'Update product promotion',
+  DELETE_PRODUCT_PROMOTION: 'Delete product promotion',
 }
 
 export const FILTER_OPTIONS = {

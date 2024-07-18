@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import ProductCard from '@/components/customer-screen/product/product-card'
 import FilterForm from '@/components/customer-screen/filter-form'
-import CategoriesSection from '@/components/customer-screen/categories/categories-section'
 import { useViewProductList } from '@/features/manager-feature/product-mng/view-product/use-view-product'
 import { ProductDetail } from '@/types'
 
 export default function ProductsList() {
   const { data } = useViewProductList()
-  const [filters, setFilters] = useState({ price: [1, 100], brand: '', byAge: [1, 20] })
+  const [filters, setFilters] = useState({ price: [0, 200], brand: '', byAge: [0, 30] })
 
   const filteredData = data?.filter((product: ProductDetail) => {
     const inPriceRange = product.productPrice >= filters.price[0] && product.productPrice <= filters.price[1]

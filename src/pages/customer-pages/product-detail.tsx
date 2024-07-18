@@ -20,6 +20,7 @@ import {
   Space,
   Form,
   Input,
+  Spin,
 } from 'antd'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import { useState } from 'react'
@@ -27,12 +28,14 @@ import { useViewDetailProduct } from '@/hooks/customer-hook/product/use-view-det
 import { useParams } from 'react-router-dom'
 import { useAddCartItem } from '@/hooks/customer-hook/cart/use-add-cart.item'
 import SimilarCard from '@/components/customer-screen/product/similar-card'
+import { useViewProductList } from '@/features/manager-feature/product-mng/view-product/use-view-product'
+import ProductCard from '@/components/customer-screen/product/product-card'
 
 const { Title, Paragraph } = Typography
 
 export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1)
-  const [currentTab, setCurrentTab] = useState('description')
+  const [currentTab, setCurrentTab] = useState('review')
   const [newReview, setNewReview] = useState({ rating: 0, content: '' })
   const { productId }: any = useParams()
   const AddToCartMutation = useAddCartItem()
@@ -52,6 +55,13 @@ export default function ProductDetail() {
     console.log('New review: ', values)
     setNewReview({ rating: 0, content: '' })
   }
+  const { data, isLoading } = useViewProductList()
+
+  if (isLoading) {
+    return <Spin tip="Loading..." />
+  }
+  // Assuming product?.productBrand exists and is the brand of the current product
+  const similarProducts = data?.filter((item) => item.productBrand === product?.productBrand).slice(0, 3)
 
   const reviews = [
     {
@@ -206,12 +216,6 @@ export default function ProductDetail() {
             <div className="prod-tab js-tabs">
               <ul className="prod-tab__list">
                 <li
-                  className={`prod-tab__item ${currentTab === 'description' ? 'prod-tab__item--current' : ''}`}
-                  onClick={() => handleTabChange('description')}
-                >
-                  Description
-                </li>
-                <li
                   className={`prod-tab__item ${currentTab === 'review' ? 'prod-tab__item--current' : ''}`}
                   onClick={() => handleTabChange('review')}
                 >
@@ -226,51 +230,7 @@ export default function ProductDetail() {
               </ul>
               <div className="prod-tab__contents">
                 {/* <!-- Description --> */}
-                <div
-                  className={`prod-tab__content ${currentTab === 'description' ? 'prod-tab__content--current' : ''}`}
-                >
-                  <div className="row">
-                    <div className="col-8 col-xl-10 col-lg-12">
-                      <div className="text-content prod-tab__text-content">
-                        <h2>Lorem ipsum dolor sit amet.</h2>
-                        <p>
-                          Lorem ipsum dolor sit amet <a href="#!">consectetur</a> adipisicing elit. Aliquid, cupiditate.
-                          Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda
-                          <a href="#!">praesentium</a> et! Illum dolorem est rem voluptas nam! Voluptatem.
-                        </p>
-                        <h3>Lorem ipsum dolor sit amet.</h3>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem,
-                          ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et!
-                          Illum dolorem est rem voluptas nam! Voluptatem.
-                        </p>
-                        <p>
-                          <img src={item1} alt="" />
-                          <em>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</em>
-                        </p>
-                        <blockquote>
-                          <p>
-                            Lorem ipsum dolor sit amet <em>consectetur</em>
-                            <u>adipisicing</u> elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae
-                            voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem
-                            voluptas nam! Voluptatem.
-                          </p>
-                        </blockquote>
-                        <h3>Lorem ipsum dolor sit amet.</h3>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem,
-                          ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et!
-                          Illum dolorem est rem voluptas nam! Voluptatem.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem,
-                          ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et!
-                          Illum dolorem est rem voluptas nam! Voluptatem.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
                 {/* <!-- Review tab --> */}
                 <div className={`prod-tab__content ${currentTab === 'review' ? 'prod-tab__content--current' : ''}`}>
                   <div className="prod-content">
@@ -297,7 +257,7 @@ export default function ProductDetail() {
                           )}
                         />
 
-                        <Card className="mb-8">
+                        {/* <Card className="mb-8">
                           <h3>Write a Review</h3>
                           <Form onFinish={handleSubmitReview}>
                             <Form.Item name="rating" rules={[{ required: true, message: 'Please rate the product' }]}>
@@ -312,7 +272,7 @@ export default function ProductDetail() {
                               </Button>
                             </Form.Item>
                           </Form>
-                        </Card>
+                        </Card> */}
                       </div>
                     </div>
                   </div>
@@ -322,12 +282,9 @@ export default function ProductDetail() {
                   <div className="prod-content">
                     <h2 className="prod-content__heading">Similar items you might like</h2>
                     <div className="row row-cols-6 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-2">
-                      <SimilarCard />
-                      <SimilarCard />
-                      <SimilarCard />
-                      <SimilarCard />
-                      <SimilarCard />
-                      <SimilarCard />
+                      {similarProducts?.map((product) => (
+                        <ProductCard key={product.productId} {...product} />
+                      ))}
                     </div>
                   </div>
                 </div>

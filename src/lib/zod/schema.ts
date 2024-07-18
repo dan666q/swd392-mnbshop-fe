@@ -26,12 +26,18 @@ export const editProfileTemplateSchema = z.object({
 })
 
 export const productSchema = z.object({
-  name: z.string().min(1, 'Product name is required'),
-  category: z.string().min(1, 'Category is required'),
-  price: z.number().min(0, 'Price must be a positive number'),
-  stock: z.number().int().min(0, 'Stock must be a non-negative integer'),
-  status: z.enum(['Active', 'Inactive']),
-  description: z.string().min(1, 'Description is required'),
+  productName: z.string().min(1, 'Product name is required'),
+  brandId: z.number(),
+  productDescription: z.string().min(1, 'Product description is required'),
+  productImg: z.string().url('Product image must be a valid URL'),
+  productPrice: z.number().min(0, 'Product price must be a positive number or zero'),
+  quantity: z.number().int().min(0, 'Quantity must be a non-negative integer'),
+  byAge: z.number().int().min(0, 'Age must be a non-negative integer'),
+  isPreOrder: z.boolean().optional(),
+  preOrderAmount: z.number().optional(),
+  isPromote: z.boolean(),
+  isDisable: z.boolean(),
+  discount: z.number().min(0, 'Discount must be a non-negative number'),
 })
 
 export const accountSchema = z.object({
@@ -43,6 +49,20 @@ export const accountSchema = z.object({
   gender: z.boolean(),
   dateOfBirth: z.string().min(1, 'Date of birth is required'),
   roleId: z.number(),
+})
+
+export const createAccountSchema = z.object({
+  username: z.string(),
+  password: z.string(),
+  fullName: z.string(),
+  dateOfBirth: z.string(),
+  gender: z.boolean(),
+  address: z.string(),
+  phone: z.string(),
+  image: z.string().default('https://greekherald.com.au/wp-content/uploads/2020/07/default-avatar.png'),
+  status: z.string(),
+  isDisable: z.boolean().default(false),
+  email: z.string(),
 })
 
 export const signUpSchema = z

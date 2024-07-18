@@ -14,8 +14,8 @@ const getBrandList = async () => {
 
 const getBrandById = async (id: number) => {
   try {
-    const { data } = await apiInstance.get<BrandListApiResponse>(import.meta.env.VITE_BRAND_LIST_API + id)
-    return data
+    const { data } = await apiInstance.get(import.meta.env.VITE_BRAND_LIST_API + id)
+    return data.data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
     throw new Error(errorResponse.response?.data.message)

@@ -9,6 +9,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 
 export default function PrivateRoute({ children, roles }: { children: ReactNode; roles: number[] }) {
   const { user } = useAuth()
+  console.log(user)
   const navigate = useNavigate()
 
   const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY)

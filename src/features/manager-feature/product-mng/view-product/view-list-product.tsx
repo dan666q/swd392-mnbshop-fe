@@ -1,10 +1,10 @@
 import TableData from '@/components/manager-screen/table'
 import { VIEW_PRODUCT_COLS } from '@/constants/table-columns'
 import { ProductDetail, ProductTableData } from '@/types'
-import { useViewProductList } from './use-view-product'
+import { useViewProductListManager } from './use-view-product-manager'
 
 export default function ViewListProduct() {
-  const { data, isLoading } = useViewProductList()
+  const { data, isLoading } = useViewProductListManager()
 
   const addKeyToData = (dataArray: ProductTableData[] | ProductDetail[] | null) => {
     if (!dataArray) return []
@@ -15,6 +15,7 @@ export default function ViewListProduct() {
       }
     })
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataWithKeys: any = (data && addKeyToData(data)) || []
 
   return (

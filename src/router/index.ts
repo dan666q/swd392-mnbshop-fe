@@ -31,6 +31,7 @@ import ViewBlogDetail from '@/features/manager-feature/blog-mng/view-blog/view-b
 import ViewPromotionDetail from '@/features/manager-feature/promotion-mng/view-promotion/view-promotion-detail'
 import CustomerOrderDetail from '@/pages/customer-pages/customer-order-detail'
 import CustomerOders from '@/pages/customer-pages/customer-orders'
+import UnauthorizedPage from '@/pages/unauthorized'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -39,6 +40,7 @@ export const ROUTE_PATHS = {
   SIGNUP: '/signup',
   PRODUCT: '/product',
   BLOG: '/blog',
+  UNAUTHORIZE: '/unauthorized',
 }
 
 export const ROUTE_PATHS_CUSTOMER = {
@@ -239,7 +241,7 @@ export const routes = [
     component: OrderManager,
     layout: ManagerDefaultLayout,
     private: true,
-    roles: [AUTHORITIES.ADMIN],
+    roles: [AUTHORITIES.ADMIN, AUTHORITIES.STAFF],
   },
   {
     path: `${ROUTE_PATHS_MANAGER.M_ORDER}/:orderId`,
@@ -247,7 +249,7 @@ export const routes = [
     component: ViewOrderDetail,
     layout: ManagerDefaultLayout,
     private: true,
-    roles: [AUTHORITIES.ADMIN],
+    roles: [AUTHORITIES.ADMIN, AUTHORITIES.STAFF],
   },
   {
     path: ROUTE_PATHS_MANAGER.M_BLOG,
@@ -255,7 +257,7 @@ export const routes = [
     component: BlogManager,
     layout: ManagerDefaultLayout,
     private: true,
-    roles: [AUTHORITIES.ADMIN],
+    roles: [AUTHORITIES.ADMIN, AUTHORITIES.STAFF],
   },
   {
     path: `${ROUTE_PATHS_MANAGER.M_BLOG}/:blogId`,
@@ -263,7 +265,7 @@ export const routes = [
     component: ViewBlogDetail,
     layout: ManagerDefaultLayout,
     private: true,
-    roles: [AUTHORITIES.ADMIN],
+    roles: [AUTHORITIES.ADMIN, AUTHORITIES.STAFF],
   },
   {
     path: ROUTE_PATHS_MANAGER.M_PROMOTION,
@@ -282,10 +284,13 @@ export const routes = [
     roles: [AUTHORITIES.ADMIN],
   },
   {
+    path: ROUTE_PATHS.UNAUTHORIZE,
+    name: 'Unauthorized',
+    component: UnauthorizedPage,
+  },
+  {
     path: `*`,
     name: 'Not found',
     component: NotFound,
-    private: true,
-    roles: [AUTHORITIES.ADMIN],
   },
 ]

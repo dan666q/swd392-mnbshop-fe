@@ -7,7 +7,7 @@ import {
   ProductTableData,
   PromotionTableData,
 } from '@/types'
-import { Image, TableColumnsType, Tag, Tooltip } from 'antd'
+import { Button, Image, TableColumnsType, Tag, Tooltip } from 'antd'
 import {
   ViewAccountDropdown,
   ViewBlogDropdown,
@@ -20,7 +20,9 @@ import { getTagColor } from '@/utils'
 import { Link } from 'react-router-dom'
 import { ROUTE_PATHS_MANAGER } from '@/router'
 import dayjs from 'dayjs'
-import { ROLE_MAPPING } from '.'
+import { POPUP_TITLE, ROLE_MAPPING } from '.'
+import Popup from '@/components/manager-screen/popup'
+import AddProductPromotion from '@/features/manager-feature/promotion-mng/add-promotion/add-product-promotion'
 
 export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
   {
@@ -80,13 +82,110 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     render: (quantity) => <span>{quantity}</span>,
   },
   {
+    title: 'STATUS',
+    dataIndex: 'isDisable',
+    key: 'isDisable',
+    width: 140,
+    align: 'center',
+    render: (isDisable) => {
+      return <Tag color={isDisable ? 'error' : 'success'}>{isDisable ? 'Disabled' : 'Active'}</Tag>
+    },
+  },
+  {
     title: 'Action',
     key: 'operation',
     width: 90,
     align: 'center',
 
     render: (record) => {
-      return <Dropdown items={ViewProductDropdown(record.productName, record.productId)} />
+      return <Dropdown items={ViewProductDropdown(record.productName, record.productId, record.isDisable)} />
+    },
+  },
+]
+
+export const VIEW_PRODUCT_PROMOTION_COLS: TableColumnsType<ProductTableData> = [
+  {
+    title: 'ID',
+    dataIndex: 'productId',
+    key: 'productId',
+    width: 80,
+    align: 'center',
+  },
+  {
+    title: 'IMAGE',
+    dataIndex: 'productImg',
+    key: 'productImg',
+    align: 'center',
+    render: (productImg: string) => (
+      <Image src={productImg} preview={false} className="rounded-xl" alt="Brand Image" width={80} />
+    ),
+  },
+  {
+    title: 'PRODUCT NAME',
+    dataIndex: 'productName',
+    key: 'name',
+    align: 'center',
+    render: (name: string, record: ProductTableData) => (
+      <Link to={`${ROUTE_PATHS_MANAGER.M_PRODUCT}/${record.productId}`}>{name}</Link>
+    ),
+  },
+  {
+    title: 'BRAND',
+    dataIndex: 'productBrand',
+    key: 'productBrand',
+    width: 200,
+    align: 'center',
+  },
+  {
+    title: 'PRICE',
+    dataIndex: 'productPrice',
+    key: 'productPrice',
+    width: 140,
+    align: 'center',
+    render: (price) => <span>${price}</span>,
+  },
+  {
+    title: 'DISCOUNT',
+    dataIndex: 'discount',
+    key: 'description',
+    width: 140,
+    align: 'center',
+    render: (discount) => <span>{discount}%</span>,
+  },
+  {
+    title: 'QUANTITY',
+    dataIndex: 'quantity',
+    key: 'image',
+    width: 140,
+    align: 'center',
+    render: (quantity) => <span>{quantity}</span>,
+  },
+  {
+    title: 'STATUS',
+    dataIndex: 'isDisable',
+    key: 'isDisable',
+    width: 140,
+    align: 'center',
+    render: (isDisable) => {
+      return <Tag color={isDisable ? 'error' : 'success'}>{isDisable ? 'Disabled' : 'Active'}</Tag>
+    },
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    width: 90,
+    align: 'center',
+    render: (_, record) => {
+      return (
+        <Popup
+          width={700}
+          title={POPUP_TITLE.ADD_PRODUCT_PROMOTION}
+          type="form"
+          content={<AddProductPromotion product={record.productId} />}
+        >
+          <Button type="primary">Add</Button>
+        </Popup>
+      )
     },
   },
 ]
@@ -101,10 +200,12 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
   },
   {
     title: 'IMAGE',
-    dataIndex: 'image',
-    key: 'image',
+    dataIndex: 'brandImg',
+    key: 'brandImg',
     align: 'center',
-    render: (image: string) => <Image src={image} preview={false} className="rounded-xl" alt="Brand Image" />,
+    render: (image: string) => (
+      <Image src={image} preview={false} className="rounded-xl" alt="Brand Image" width={80} />
+    ),
   },
   {
     title: 'BRAND NAME',
@@ -204,8 +305,8 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     key: 'isDisable',
     width: 90,
     align: 'center',
-    render: (record) => {
-      return record ? <span className="text-red-500">Yes</span> : <span className="text-green-500">No</span>
+    render: (isDisable) => {
+      return <Tag color={isDisable ? 'error' : 'success'}>{isDisable ? 'Disabled' : 'Active'}</Tag>
     },
   },
   {
@@ -229,7 +330,7 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     width: 90,
     align: 'center',
     render: (record) => {
-      return <Dropdown items={ViewAccountDropdown(record.fullName, record.id)} />
+      return <Dropdown items={ViewAccountDropdown(record.fullName, record.id, record.isDisable)} />
     },
   },
 ]
@@ -348,6 +449,9 @@ export const VIEW_BLOG_COLS: TableColumnsType<BlogTableData> = [
     dataIndex: 'usefulVote',
     key: 'usefulVote',
     align: 'center',
+    render: (usefulVote) => {
+      return <span>{usefulVote ? usefulVote : 0}</span>
+    },
   },
   {
     title: 'Action',

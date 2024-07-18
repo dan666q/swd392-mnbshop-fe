@@ -13,10 +13,10 @@ interface DisableAccountProps {
 
 export default function DisableAccount({ fullName, id }: DisableAccountProps) {
   const dispatch = useAppDispatch()
-  const disableAccountMutation = useDisableAccount()
+  const disableAccountMutation = useDisableAccount(id)
   function handleDelete(id: number) {
     console.log(id)
-    disableAccountMutation.mutate(id)
+    disableAccountMutation.mutate()
     dispatch(closePopup(POPUP_TITLE.DISABLE_ACCOUNT))
   }
 

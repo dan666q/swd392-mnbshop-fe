@@ -4,23 +4,27 @@ import { DefaultButtonStyle } from '@/lib/antd/antd-styles'
 import { useAppDispatch } from '@/lib/redux-toolkit/hook'
 import { closePopup } from '@/lib/redux-toolkit/slices/popup-slice'
 import { Button, Typography } from 'antd'
+import { useDeleteProduct } from './use-delete-product'
 
-interface DeleteBlogProps {
-  title: string
-  blogId: string
+interface DeleteProductProps {
+  productName: string
+  productId: string
 }
 
-export default function DeleteBlog({ title, blogId }: DeleteBlogProps) {
+export default function DeleteProduct({ productName, productId }: DeleteProductProps) {
   const dispatch = useAppDispatch()
+  const deleteProductMutation = useDeleteProduct(productId)
+
   const handleDelete = () => {
-    console.log(blogId)
-    dispatch(closePopup(POPUP_TITLE.DELETE_BLOG))
+    deleteProductMutation.mutate()
+    dispatch(closePopup(POPUP_TITLE.DELETE_PRODUCT))
   }
+
   return (
     <>
-      <Typography.Text>Are you sure to delete blog: {title}?</Typography.Text>
+      <Typography.Text>Are you sure to delete {productName}?</Typography.Text>
       <div className="flex items-center justify-end mt-4">
-        <Button danger type="text" className="mr-2" onClick={() => dispatch(closePopup(POPUP_TITLE.DELETE_BLOG))}>
+        <Button danger type="text" className="mr-2" onClick={() => dispatch(closePopup(POPUP_TITLE.DELETE_PRODUCT))}>
           Cancel
         </Button>
         <ConfigAntdTheme theme={DefaultButtonStyle}>

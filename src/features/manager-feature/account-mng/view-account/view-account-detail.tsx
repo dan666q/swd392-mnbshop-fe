@@ -10,14 +10,17 @@ import { useViewAccountDetail } from './use-view-account-detail'
 import { ROLE_MAPPING } from '@/constants'
 import { useParams } from 'react-router-dom'
 import { Skeleton } from 'antd'
+import { useEditAccount } from '../update-account/use-edit-account'
+import { useDisableAccount } from '../delete-account/use-disable-account'
 
 const { Option } = Select
 
 export default function ViewAccountDetail() {
   const { accountId } = useParams()
   const { data: account, isLoading } = useViewAccountDetail(Number(accountId))
-
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
+  const useEditAccountMutation = useEditAccount(Number(accountId))
+  const useDisableAccountMutation = useDisableAccount(Number(accountId))
 
   const {
     control,
@@ -35,7 +38,8 @@ export default function ViewAccountDetail() {
   }
 
   const handleEditOk = handleSubmit((data) => {
-    console.log({ ...account, ...data })
+    const inputData = { ...data, password: account?.password }
+    useEditAccountMutation.mutate(inputData)
     setIsEditModalVisible(false)
   })
 
@@ -55,7 +59,7 @@ export default function ViewAccountDetail() {
             <Button
               danger={!account?.isDisable}
               icon={account?.isDisable ? <UnlockOutlined /> : <LockOutlined />}
-              onClick={() => console.log(account?.id, account?.isDisable)}
+              onClick={() => useDisableAccountMutation.mutate()}
             >
               {account?.isDisable ? 'Enable' : 'Disable'}
             </Button>

@@ -1,14 +1,23 @@
 import { Menu, Layout, Button } from 'antd'
 import { CloseOutlined, BarsOutlined } from '@ant-design/icons'
 import { useState } from 'react'
-import { NavigatorItems } from '@/constants/menu-data'
+import { NavigatorItems, NavigatorItemsStaff } from '@/constants/menu-data'
 import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
+import { DecodedToken } from '@/types'
+import { TOKEN_KEY } from '@/lib/axios'
 
 const { Sider } = Layout
+
+const decodeToken = (token: string) => {
+  const decodedToken = jwtDecode<DecodedToken>(token)
+  return decodedToken
+}
 
 export default function Navigator() {
   const [isCollapse, setIsCollapse] = useState(false)
   const navigate = useNavigate()
+  const roleId = decodeToken(localStorage.getItem(TOKEN_KEY) || '').RoleId
   const toggleCollapse = () => setIsCollapse((prev) => !prev)
 
   return (
@@ -22,7 +31,16 @@ export default function Navigator() {
           </>
         )}
       </Button>
-      <Menu onClick={({ key }) => navigate(key)} className="bg-foreground" mode="inline" items={NavigatorItems} />
+      {roleId == '1' ? (
+        <Menu onClick={({ key }) => navigate(key)} className="bg-foreground" mode="inline" items={NavigatorItems} />
+      ) : (
+        <Menu
+          onClick={({ key }) => navigate(key)}
+          className="bg-foreground"
+          mode="inline"
+          items={NavigatorItemsStaff}
+        />
+      )}
     </Sider>
   )
 }

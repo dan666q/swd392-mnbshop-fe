@@ -52,12 +52,38 @@ const deletePromotion = async (id: number) => {
   }
 }
 
+const addProductToPromotion = async (promotionId: number, productId: number) => {
+  try {
+    const { data: response } = await apiInstance.post(
+      import.meta.env.VITE_PROMOTION_ADD_PRODUCT_API + promotionId + '?productId=' + productId
+    )
+    return response
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
+const deleteProductFromPromotion = async (promotionId: number, productId: number) => {
+  try {
+    const { data: response } = await apiInstance.delete(
+      import.meta.env.VITE_PROMOTION_DELETE_PRODUCT_API + promotionId + '?productId=' + productId
+    )
+    return response
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
 const promotionApi = {
   getPromotionList,
   getPromotionById,
   addPromotion,
   updatePromotion,
   deletePromotion,
+  addProductToPromotion,
+  deleteProductFromPromotion,
 }
 
 export default promotionApi

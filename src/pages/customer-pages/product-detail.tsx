@@ -1,10 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import search from '@/assets/icons/search.svg'
 import arrowRight from '@/assets/icons/arrow-right.svg'
-import star from '@/assets/icons/star.svg'
-import heart from '@/assets/icons/heart.svg'
-import heartRed from '@/assets/icons/heart-red.svg'
 import avatar1 from '@/assets/img/avatar/avatar-1.png'
-import item1 from '@/assets/img/product/milk1.png'
 import {
   Row,
   Col,
@@ -18,8 +15,6 @@ import {
   Avatar,
   Card,
   Space,
-  Form,
-  Input,
   Spin,
 } from 'antd'
 import { ShoppingCartOutlined } from '@ant-design/icons'
@@ -27,7 +22,6 @@ import { useState } from 'react'
 import { useViewDetailProduct } from '@/hooks/customer-hook/product/use-view-detail-product'
 import { useParams } from 'react-router-dom'
 import { useAddCartItem } from '@/hooks/customer-hook/cart/use-add-cart.item'
-import SimilarCard from '@/components/customer-screen/product/similar-card'
 import { useViewProductList } from '@/features/manager-feature/product-mng/view-product/use-view-product'
 import ProductCard from '@/components/customer-screen/product/product-card'
 
@@ -55,6 +49,7 @@ export default function ProductDetail() {
     console.log('New review: ', values)
     setNewReview({ rating: 0, content: '' })
   }
+
   const { data, isLoading } = useViewProductList()
 
   if (isLoading) {
@@ -109,19 +104,19 @@ export default function ProductDetail() {
               </li>
               <li>
                 <a href="#!" className="breadcrumbs__link">
-                  Coffee
+                  Milk
                   <img src={arrowRight} alt="" />
                 </a>
               </li>
               <li>
                 <a href="#!" className="breadcrumbs__link">
-                  Coffee Beans
+                  Milk for baby
                   <img src={arrowRight} alt="" />
                 </a>
               </li>
               <li>
                 <a href="#!" className="breadcrumbs__link breadcrumbs__link--current">
-                  LavAzza
+                  1-3 years old
                 </a>
               </li>
             </ul>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useViewOrderUserDetail } from '@/hooks/customer-hook/order/use-view-order-detail-user'
@@ -5,6 +6,7 @@ import { Table, Tag, Spin, Descriptions, Button, Modal, Form, Input, notificatio
 import { format } from 'date-fns'
 import { useAddFeedback } from '@/hooks/customer-hook/feedback/use-add-feedback'
 import { useAuth } from '@/hooks/use-auth'
+import imgUrl from '@/assets/img/thanhtoanqr.jpg'
 
 const { Column } = Table
 const { TextArea } = Input
@@ -80,6 +82,10 @@ const OrderDetailTable = () => {
     }
   }
 
+  const formatNumber = (number: any) => {
+    return new Intl.NumberFormat('vi-VN').format(number)
+  }
+
   if (isLoading) return <Spin size="large" />
   if (error) return <p>Error: {error.message}</p>
   if (!orderDetail) return <p>No order details found for order ID {orderId}</p>
@@ -91,12 +97,17 @@ const OrderDetailTable = () => {
         <Descriptions.Item label="Full Name">{fullName}</Descriptions.Item>
         <Descriptions.Item label="Phone">{phone}</Descriptions.Item>
         <Descriptions.Item label="Delivery Address">{deliverAddress}</Descriptions.Item>
-        <Descriptions.Item label="Payment Method">{paymentMethod}</Descriptions.Item>
+        <Descriptions.Item label="Payment Method">
+          <div className="mt-5">
+            <span>Thanh toán chuyển khoản</span>
+            {status === 'processing' && <img src={imgUrl} alt="" className="w-72 h-96" />}
+          </div>
+        </Descriptions.Item>
         <Descriptions.Item label="Status">
-          <Tag color={status === 'processing' ? 'blue' : 'gold'}>{status}</Tag>
+          <Tag color={status === 'processing' ? 'blue' : 'gold'}>{status.toLocaleUpperCase()}</Tag>
         </Descriptions.Item>
         <Descriptions.Item label="Order Date">{format(new Date(orderDate), 'yyyy-MM-dd HH:mm:ss')}</Descriptions.Item>
-        <Descriptions.Item label="Total Price">{`${computedTotalPrice.toFixed(2)} VND`}</Descriptions.Item>
+        <Descriptions.Item label="Total Price">{`${formatNumber(computedTotalPrice)} VND`}</Descriptions.Item>
       </Descriptions>
 
       <Table dataSource={productOrders} rowKey="productId" className="mt-4">
@@ -107,12 +118,12 @@ const OrderDetailTable = () => {
           title="Price"
           dataIndex="unitPrice"
           key="unitPrice"
-          render={(unitPrice) => `$${unitPrice.toFixed(2)} VND`}
+          render={(unitPrice) => `${formatNumber(unitPrice)} VND`}
         />
         <Column
           title="Total"
           key="total"
-          render={(_, record) => `$${(record.quantity * record.unitPrice).toFixed(2)} VND`}
+          render={(_, record) => `${formatNumber(record.quantity * record.unitPrice)} VND`}
         />
         {status === 'completed' && (
           <Column

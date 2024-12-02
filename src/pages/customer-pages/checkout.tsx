@@ -1,5 +1,6 @@
 import { Button, Typography } from 'antd'
 import { HomeOutlined, FileTextOutlined } from '@ant-design/icons'
+import imgUrl from '@/assets/img/thanhtoanqr.jpg'
 
 const { Text } = Typography
 
@@ -33,8 +34,17 @@ const Checkout = () => {
         <div className="text-center p-8 bg-white shadow-lg rounded-lg">
           <div className="mb-8">
             <Text strong className="text-3xl">
-              Your Order is Successfully Placed.
+              Vui lòng thanh toán trong vòng 12 tiếng để được xác nhận đơn hàng
             </Text>
+            <br />
+            <div className="mt-5">
+              <Text strong className="text-3xl">
+                Kiểm tra trạng thái đơn hàng ở order detail
+              </Text>
+            </div>
+          </div>
+          <div className="mb-8 w-1/2 mx-auto">
+            <img src={imgUrl} alt="" />
           </div>
           <div className="space-x-4">
             <Button type="primary" size="large" icon={<HomeOutlined />} onClick={handleBackToHome}>

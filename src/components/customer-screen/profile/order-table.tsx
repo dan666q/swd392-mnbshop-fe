@@ -1,4 +1,4 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useViewOrderUserList } from '@/hooks/customer-hook/order/use-view-order-user'
 import { Table, Tag, Button } from 'antd'
 import { format } from 'date-fns'
@@ -21,7 +21,11 @@ const OrderTable = () => {
   }
 
   // Filter orderList to show only orders belonging to the logged-in user
-  const userOrderList = orderList.filter((order) => order.userId === user.data.id)
+  const userOrderList = orderList?.filter((order) => order.userId === user.data.id)
+
+  const formatNumber = (number: any) => {
+    return new Intl.NumberFormat('vi-VN').format(number)
+  }
 
   return (
     <Table dataSource={userOrderList} style={{ width: '1000px' }}>
@@ -30,13 +34,13 @@ const OrderTable = () => {
         title="Payment Method"
         dataIndex="paymentMethod"
         key="paymentMethod"
-        render={(paymentMethod) => <span>{paymentMethod}</span>}
+        render={() => <span>Thanh toán chuyển khoản</span>}
       />
       <Column
         title="Status"
         dataIndex="status"
         key="status"
-        render={(status) => <Tag color={status === 'processing' ? 'blue' : 'gold'}>{status}</Tag>}
+        render={(status) => <Tag color={status === 'processing' ? 'blue' : 'gold'}>{status.toLocaleUpperCase()}</Tag>}
       />
       <Column
         title="Order Date"
@@ -48,7 +52,7 @@ const OrderTable = () => {
         title="Total Price"
         dataIndex="totalPrice"
         key="totalPrice"
-        render={(totalPrice) => `${totalPrice.toFixed(2)} VND`}
+        render={(totalPrice) => `${formatNumber(totalPrice)} VND`}
       />
       <Column
         title="Actions"

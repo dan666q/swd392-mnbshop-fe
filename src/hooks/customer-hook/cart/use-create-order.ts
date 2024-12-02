@@ -1,5 +1,5 @@
 import { queryClient } from '@/constants'
-import { ROUTE_PATHS, ROUTE_PATHS_CUSTOMER } from '@/router'
+import { ROUTE_PATHS_CUSTOMER } from '@/router'
 import cartApi from '@/services/cart'
 import { useMutation } from '@tanstack/react-query'
 import { notification } from 'antd'

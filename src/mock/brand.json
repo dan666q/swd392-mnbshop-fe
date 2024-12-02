@@ -1,0 +1,47 @@
+[
+  {
+    "key": "1",
+    "brandId": "BR001",
+    "brandName": "Acme Corporation",
+    "description": "Leading provider of innovative solutions.",
+    "image": "https://cdn1.concung.com/img/m/907_logo.png",
+    "numberOfProducts": 120,
+    "updateAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "key": "2",
+    "brandId": "BR002",
+    "brandName": "Globex Corporation",
+    "description": "Global manufacturer of high-quality products.",
+    "image": "https://cdn1.concung.com/img/m/907_logo.png",
+    "numberOfProducts": 85,
+    "updateAt": "2024-02-20T14:45:00Z"
+  },
+  {
+    "key": "3",
+    "brandId": "BR003",
+    "brandName": "Soylent Corp",
+    "description": "Innovating the future of food technology.",
+    "image": "https://cdn1.concung.com/img/m/907_logo.png",
+    "numberOfProducts": 60,
+    "updateAt": "2024-03-12T09:15:00Z"
+  },
+  {
+    "key": "4",
+    "brandId": "BR004",
+    "brandName": "Initech",
+    "description": "Pioneers in business software solutions.",
+    "image": "https://cdn1.concung.com/img/m/907_logo.png",
+    "numberOfProducts": 45,
+    "updateAt": "2024-04-01T11:00:00Z"
+  },
+  {
+    "key": "5",
+    "brandId": "BR005",
+    "brandName": "Umbrella Corporation",
+    "description": "Innovating pharmaceutical and biotechnical advancements.",
+    "image": "https://cdn1.concung.com/img/m/907_logo.png",
+    "numberOfProducts": 200,
+    "updateAt": "2024-05-05T13:30:00Z"
+  }
+]

@@ -1,10 +1,12 @@
-import Login from './pages/login'
+import SupportButton from './components/customer-screen/support-button'
+import Router from './router/router'
 
 function App() {
   return (
-    <div>
-      <Login />
-    </div>
+    <>
+      <Router />
+      <SupportButton />
+    </>
   )
 }
 

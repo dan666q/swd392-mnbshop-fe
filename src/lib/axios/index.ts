@@ -1,7 +1,8 @@
-import axios, { AxiosResponse } from 'axios'
+import authApi from '@/services/auth'
+import axios from 'axios'
 
-export const TOKEN_KEY = 'mnb_token'
-export const REFRESH_TOKEN_KEY = 'mnb_refresh_token'
+export const TOKEN_KEY = 'AccessToken'
+export const REFRESH_TOKEN_KEY = 'RefreshToken'
 
 const apiInstance = axios.create({
   baseURL: import.meta.env.VITE_API_SECRET,
@@ -10,16 +11,26 @@ const apiInstance = axios.create({
   },
 })
 
-//TODO: Add a request interceptor (Set token in header)
-apiInstance.interceptors.response.use(
-  (response: AxiosResponse) => response?.data ?? response,
-  (error) => Promise.reject(error)
+apiInstance.interceptors.request.use(
+  async (config) => {
+    const token = localStorage.getItem(TOKEN_KEY)
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
 )
 
 // TODO: Clear local storage and redirect to login
 export const logOutApp = async () => {
-  localStorage.removeItem(TOKEN_KEY)
-  localStorage.removeItem(REFRESH_TOKEN_KEY)
+  const resp = await authApi.logOut()
+  if (resp.msg === 'logout') {
+    localStorage.clear()
+    window.location.reload()
+  }
 }
 
 export default apiInstance

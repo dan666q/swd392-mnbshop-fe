@@ -9,7 +9,6 @@ import { useViewOrderDetail } from './use-view-order-detail'
 import { POPUP_TITLE } from '@/constants'
 import { jwtDecode } from 'jwt-decode'
 import { TOKEN_KEY } from '@/lib/axios'
-import { render } from 'react-dom'
 
 const { Title } = Typography
 
@@ -79,11 +78,9 @@ export default function ViewOrderDetail() {
     <div className="p-6">
       <div className="flex justify-between">
         <Title level={2}>Order Details</Title>
-        {roleId == '2' ? (
-          <Popup width={500} type="confirm" title={POPUP_TITLE.UPDATE_ORDER} content={EditOrder(orderIdNumber)}>
-            <Button type="primary">Update Order</Button>
-          </Popup>
-        ) : null}
+        <Popup width={500} type="confirm" title={POPUP_TITLE.UPDATE_ORDER} content={EditOrder(orderIdNumber)}>
+          <Button type="primary">Update Order</Button>
+        </Popup>
       </div>
       <Card className="mb-6">
         <Descriptions title="Order Information" bordered>

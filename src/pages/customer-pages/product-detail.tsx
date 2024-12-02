@@ -79,6 +79,10 @@ export default function ProductDetail() {
     },
   ]
 
+  const formatNumber = (number: any) => {
+    return new Intl.NumberFormat('vi-VN').format(number)
+  }
+
   return (
     <div>
       <main className="product-page">
@@ -141,7 +145,7 @@ export default function ProductDetail() {
                   <span className="ml-2 text-gray-500">(1100 reviews)</span>
                 </div>
                 <Title level={3} className="text-blue-600">
-                  ${product?.productPrice.toFixed(2)}
+                  {formatNumber(product?.productPrice.toFixed(2))} VND
                 </Title>
                 <hr />
                 <Paragraph className="mt-4">{product?.productDescription}</Paragraph>

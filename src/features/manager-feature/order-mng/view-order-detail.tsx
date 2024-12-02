@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import dayjs from 'dayjs'
 import EditOrder from './edit-order-status/edit-order'
 import Popup from '@/components/manager-screen/popup'
@@ -8,6 +9,7 @@ import { useViewOrderDetail } from './use-view-order-detail'
 import { POPUP_TITLE } from '@/constants'
 import { jwtDecode } from 'jwt-decode'
 import { TOKEN_KEY } from '@/lib/axios'
+import { render } from 'react-dom'
 
 const { Title } = Typography
 
@@ -21,6 +23,10 @@ export default function ViewOrderDetail() {
   const orderIdNumber = orderId ? parseInt(orderId, 10) : 0
   const { data: order } = useViewOrderDetail(orderIdNumber)
   const roleId = decodeToken(localStorage.getItem(TOKEN_KEY) || '').RoleId
+
+  const formatNumber = (number: any) => {
+    return new Intl.NumberFormat('vi-VN').format(number)
+  }
 
   const columns = [
     {
@@ -57,13 +63,15 @@ export default function ViewOrderDetail() {
       title: 'Price',
       dataIndex: 'unitPrice',
       key: 'unitPrice',
-      render: (unitPrice: number) => `${unitPrice} VND`,
+      render: (unitPrice: number) => {
+        return `${formatNumber(unitPrice)} VND`
+      },
     },
     {
       title: 'Total',
       key: 'total',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      render: (_: any, record: ProductInOrder) => `${record.quantity * record.unitPrice} VND`,
+      render: (_: any, record: ProductInOrder) => `${formatNumber(record.quantity * record.unitPrice)} VND`,
     },
   ]
 
@@ -88,7 +96,7 @@ export default function ViewOrderDetail() {
           <Descriptions.Item label="Status">
             <Tag color={order?.status === 'Completed' ? 'green' : 'blue'}>{order?.status.toLocaleUpperCase()}</Tag>
           </Descriptions.Item>
-          <Descriptions.Item label="Total Price">{order?.totalPrice} VND</Descriptions.Item>
+          <Descriptions.Item label="Total Price">{formatNumber(order?.totalPrice)} VND</Descriptions.Item>
         </Descriptions>
       </Card>
 

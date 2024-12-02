@@ -6,7 +6,7 @@ import { ProductDetail } from '@/types'
 
 export default function ProductsList() {
   const { data } = useViewProductList()
-  const [filters, setFilters] = useState({ price: [0, 200], brand: '', byAge: [0, 30] })
+  const [filters, setFilters] = useState({ price: [0, 100000000], brand: '', byAge: [0, 30] })
 
   const filteredData = data?.filter((product: ProductDetail) => {
     const inPriceRange = product.productPrice >= filters.price[0] && product.productPrice <= filters.price[1]

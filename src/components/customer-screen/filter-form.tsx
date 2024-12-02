@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react'
 import { Slider, Input, Button, Tag } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'

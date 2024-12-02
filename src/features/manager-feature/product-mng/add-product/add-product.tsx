@@ -87,7 +87,7 @@ export default function AddProduct() {
           <Controller
             name="productPrice"
             control={control}
-            render={({ field }) => <InputNumber {...field} className="mt-1 w-full" prefix="$" />}
+            render={({ field }) => <InputNumber {...field} className="mt-1 w-full" prefix="VND" />}
           />
           {errors.productPrice && <p className="mt-1 text-sm text-red-600">{errors.productPrice.message}</p>}
         </div>

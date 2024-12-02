@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Dropdown from '@/components/manager-screen/dropdown'
 import {
   AccountTableData,
@@ -63,7 +64,12 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     key: 'productPrice',
     width: 140,
     align: 'center',
-    render: (price) => <span>${price}</span>,
+    render: (price) => {
+      const formatNumber = (number: any) => {
+        return new Intl.NumberFormat('vi-VN').format(number)
+      }
+      return <span>{formatNumber(price)} VND</span>
+    },
   },
   {
     title: 'DISCOUNT',
@@ -383,7 +389,10 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
     key: 'totalPrice',
     align: 'center',
     render: (totalPrice: string) => {
-      return <span>{totalPrice}$</span>
+      const formatNumber = (number: any) => {
+        return new Intl.NumberFormat('vi-VN').format(number)
+      }
+      return <span>{formatNumber(totalPrice)} VND</span>
     },
   },
   {

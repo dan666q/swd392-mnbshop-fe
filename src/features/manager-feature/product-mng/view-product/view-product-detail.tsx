@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
 import { Card, Descriptions, Image, Button, Modal, Input, InputNumber, Select, Switch } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
@@ -43,6 +44,10 @@ export default function ViewProductDetail() {
     setIsEditModalVisible(false)
   }
 
+  const formatNumber = (number: any) => {
+    return new Intl.NumberFormat('vi-VN').format(number)
+  }
+
   return (
     <div className="px-10 py-5">
       <Card
@@ -65,7 +70,7 @@ export default function ViewProductDetail() {
               <Descriptions.Item label="Product ID">{product?.productId}</Descriptions.Item>
               <Descriptions.Item label="Product Name">{product?.productName}</Descriptions.Item>
               <Descriptions.Item label="Brand">{product?.productBrand}</Descriptions.Item>
-              <Descriptions.Item label="Price">${product?.productPrice}</Descriptions.Item>
+              <Descriptions.Item label="Price">{formatNumber(product?.productPrice)} VND</Descriptions.Item>
               <Descriptions.Item label="Discount">{product?.discount}%</Descriptions.Item>
               <Descriptions.Item label="Stock">{product?.quantity}</Descriptions.Item>
               <Descriptions.Item label="By Age">{product?.byAge}</Descriptions.Item>
@@ -121,7 +126,7 @@ export default function ViewProductDetail() {
             <Controller
               name="productPrice"
               control={control}
-              render={({ field }) => <InputNumber {...field} className="mt-1 w-full" prefix="$" />}
+              render={({ field }) => <InputNumber {...field} className="mt-1 w-full" prefix="VND" />}
             />
             {errors.productPrice && <p className="mt-1 text-sm text-red-600">{errors.productPrice.message}</p>}
           </div>

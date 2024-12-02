@@ -96,7 +96,7 @@ const OrderDetailTable = () => {
           <Tag color={status === 'processing' ? 'blue' : 'gold'}>{status}</Tag>
         </Descriptions.Item>
         <Descriptions.Item label="Order Date">{format(new Date(orderDate), 'yyyy-MM-dd HH:mm:ss')}</Descriptions.Item>
-        <Descriptions.Item label="Total Price">{`$${computedTotalPrice.toFixed(2)}`}</Descriptions.Item>
+        <Descriptions.Item label="Total Price">{`${computedTotalPrice.toFixed(2)} VND`}</Descriptions.Item>
       </Descriptions>
 
       <Table dataSource={productOrders} rowKey="productId" className="mt-4">
@@ -107,12 +107,12 @@ const OrderDetailTable = () => {
           title="Price"
           dataIndex="unitPrice"
           key="unitPrice"
-          render={(unitPrice) => `$${unitPrice.toFixed(2)}`}
+          render={(unitPrice) => `$${unitPrice.toFixed(2)} VND`}
         />
         <Column
           title="Total"
           key="total"
-          render={(_, record) => `$${(record.quantity * record.unitPrice).toFixed(2)}`}
+          render={(_, record) => `$${(record.quantity * record.unitPrice).toFixed(2)} VND`}
         />
         {status === 'completed' && (
           <Column

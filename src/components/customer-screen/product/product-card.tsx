@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import addToCart from '@/assets/icons/buy.svg'
 import star from '@/assets/icons/star.svg'
 import { Link } from 'react-router-dom'
@@ -11,6 +12,10 @@ export default function ProductCard(product: ProductDetail) {
   function handleAddToCart(productId: number, quantity: number) {
     console.log(productId, quantity)
     AddToCartMutation.mutate({ productId, quantity })
+  }
+
+  const formatNumber = (number: any) => {
+    return new Intl.NumberFormat('vi-VN').format(number)
   }
 
   return (
@@ -36,7 +41,7 @@ export default function ProductCard(product: ProductDetail) {
               <img src={star} alt="" className="product-card__star" />
               <span className="product-card__score">{product?.rate}</span>
             </div>
-            <span className="product-card__price">${product?.productPrice}</span>
+            <span className="product-card__price">{formatNumber(product?.productPrice)} VND</span>
           </div>
         </article>
       </div>

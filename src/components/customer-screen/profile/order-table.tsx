@@ -48,7 +48,7 @@ const OrderTable = () => {
         title="Total Price"
         dataIndex="totalPrice"
         key="totalPrice"
-        render={(totalPrice) => `$${totalPrice.toFixed(2)}`}
+        render={(totalPrice) => `${totalPrice.toFixed(2)} VND`}
       />
       <Column
         title="Actions"

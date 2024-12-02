@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react'
 import { Slider, Input, Button, Tag } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
@@ -57,13 +58,13 @@ export default function FilterForm({ filters, setFilters }: FilterFormProps) {
                   <div>
                     <label className="filter__form-label filter__form-label--small">Minimum</label>
                     <div className="filter__form-text-input--small">
-                      <Input prefix="$" value={priceRange[0]} readOnly />
+                      <Input prefix="VND" value={priceRange[0]} readOnly />
                     </div>
                   </div>
                   <div>
                     <label className="filter__form-label filter__form-label--small">Maximum</label>
                     <div className="filter__form-text-input--small">
-                      <Input prefix="$" value={priceRange[1]} readOnly />
+                      <Input prefix="VND" value={priceRange[1]} readOnly />
                     </div>
                   </div>
                 </div>

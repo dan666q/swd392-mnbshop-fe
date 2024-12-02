@@ -65,7 +65,7 @@ export default function ViewProductDetail() {
               <Descriptions.Item label="Product ID">{product?.productId}</Descriptions.Item>
               <Descriptions.Item label="Product Name">{product?.productName}</Descriptions.Item>
               <Descriptions.Item label="Brand">{product?.productBrand}</Descriptions.Item>
-              <Descriptions.Item label="Price">${product?.productPrice}</Descriptions.Item>
+              <Descriptions.Item label="Price">{product?.productPrice} VND</Descriptions.Item>
               <Descriptions.Item label="Discount">{product?.discount}%</Descriptions.Item>
               <Descriptions.Item label="Stock">{product?.quantity}</Descriptions.Item>
               <Descriptions.Item label="By Age">{product?.byAge}</Descriptions.Item>
@@ -121,7 +121,7 @@ export default function ViewProductDetail() {
             <Controller
               name="productPrice"
               control={control}
-              render={({ field }) => <InputNumber {...field} className="mt-1 w-full" prefix="$" />}
+              render={({ field }) => <InputNumber {...field} className="mt-1 w-full" prefix="VND" />}
             />
             {errors.productPrice && <p className="mt-1 text-sm text-red-600">{errors.productPrice.message}</p>}
           </div>

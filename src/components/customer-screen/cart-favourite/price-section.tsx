@@ -36,7 +36,7 @@ export default function PriceSection({ totalItem, totalPrice, cartId }: PriceSec
           <span>
             Price <span className="cart-info__sub-label">(Total)</span>
           </span>
-          <span>${totalPrice}</span>
+          <span>{totalPrice} VND</span>
         </div>
         <div className="cart-info__row">
           <span>Shipping</span>
@@ -45,7 +45,7 @@ export default function PriceSection({ totalItem, totalPrice, cartId }: PriceSec
         <div className="cart-info__separate"></div>
         <div className="cart-info__row">
           <span>Estimated Total</span>
-          <span>${totalPrice}</span>
+          <span>{totalPrice} VND</span>
         </div>
         <button
           onClick={() => handleOrder(cartId, totalItem)}

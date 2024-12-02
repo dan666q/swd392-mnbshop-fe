@@ -118,7 +118,7 @@ export default function ViewPromotionDetail() {
       title: 'Price',
       dataIndex: 'productPrice',
       key: 'productPrice',
-      render: (productPrice: number) => `$${productPrice}`,
+      render: (productPrice: number) => `${productPrice} VND`,
     },
     {
       title: 'Action',

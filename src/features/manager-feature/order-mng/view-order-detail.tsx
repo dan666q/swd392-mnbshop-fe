@@ -57,13 +57,13 @@ export default function ViewOrderDetail() {
       title: 'Price',
       dataIndex: 'unitPrice',
       key: 'unitPrice',
-      render: (unitPrice: number) => `$${unitPrice}`,
+      render: (unitPrice: number) => `${unitPrice} VND`,
     },
     {
       title: 'Total',
       key: 'total',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      render: (_: any, record: ProductInOrder) => `$${record.quantity * record.unitPrice}`,
+      render: (_: any, record: ProductInOrder) => `${record.quantity * record.unitPrice} VND`,
     },
   ]
 
@@ -88,7 +88,7 @@ export default function ViewOrderDetail() {
           <Descriptions.Item label="Status">
             <Tag color={order?.status === 'Completed' ? 'green' : 'blue'}>{order?.status.toLocaleUpperCase()}</Tag>
           </Descriptions.Item>
-          <Descriptions.Item label="Total Price">${order?.totalPrice}</Descriptions.Item>
+          <Descriptions.Item label="Total Price">{order?.totalPrice} VND</Descriptions.Item>
         </Descriptions>
       </Card>
 

@@ -63,7 +63,7 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     key: 'productPrice',
     width: 140,
     align: 'center',
-    render: (price) => <span>${price}</span>,
+    render: (price) => <span>{price} VND</span>,
   },
   {
     title: 'DISCOUNT',
@@ -383,7 +383,7 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
     key: 'totalPrice',
     align: 'center',
     render: (totalPrice: string) => {
-      return <span>{totalPrice}$</span>
+      return <span>{totalPrice} VND</span>
     },
   },
   {
